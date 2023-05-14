@@ -38,6 +38,7 @@
                 "properties": "never"
             }
         ],
+        "quotes": ["error", "double"],
         "prettier/prettier": [
             "error",
             {
