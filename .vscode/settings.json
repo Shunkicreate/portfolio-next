@@ -12,5 +12,6 @@
 	"prettier.requirePragma": true,
 	"typescript.format.insertSpaceAfterConstructor": true,
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
-	"eslint.enable": true
+	"eslint.enable": true,
+	"eslint.format.enable": true
 }
