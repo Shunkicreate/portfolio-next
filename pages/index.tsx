@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import { useRouter } from 'next/router';
 import { MouseEvent } from 'react';
 import { GetServerSideProps } from 'next';
@@ -34,18 +33,18 @@ const Home = (props: Props) => {
 		router.push(href)
 	}
 	return (
-		<div className={ styles.container }>
+		<>
 			<Header />
-			<main className="w-full lg:w-2/4 mx-auto">
+			<main className="w-full md:w-3/4 lg:w-2/4 mx-auto">
 				<TopTitle title='Home' />
-				<div className=' mx-auto'>
+				<div className='mx-auto'>
 					<Carousel imgs={ props.imgs } />
 				</div>
 				<a href={ 'next-bus' } onClick={ (e) => { handleClick(e, 'next-bus') } }>next-bus</a>
 				<a href={ 'time-table' } onClick={ (e) => { handleClick(e, 'time-table') } }>time-table</a>
 			</main>
 			<Footer />
-		</div>
+		</>
 	)
 }
 

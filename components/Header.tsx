@@ -28,12 +28,12 @@ const Header = () => {
 	]
 
 	return (
-		<header className="drop-shadow-sm">
-			<div className='flex m-16 justify-end	'>
+		<header className="filter drop-shadow-lg">
+			<div className='flex py-4 lg:my-16 justify-end mx-4'>
 				{
 					Pages.map((page, i) => {
 						return (
-							<div key={ i } className='px-8 text-lg'>
+							<div key={ i } className='mx-4 lg:mx-8 text-md font-semibold'>
 								<a href={ page.url } className="nav-link" onClick={ (e) => { handleClick(e, page.url) } } active-class="active-link">{ page.display }</a>
 							</div>
 						)
