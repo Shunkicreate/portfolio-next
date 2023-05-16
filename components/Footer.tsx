@@ -3,11 +3,6 @@ import { MouseEvent } from 'react';
 import SNSIcon from './SNSIcon';
 
 const Footer = () => {
-	const router = useRouter();
-	const handleClick = (e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>, href: string) => {
-		e.preventDefault()
-		router.push(href)
-	}
 	const SNSData = [
 		{
 			src: "/icons/instagram.svg",
@@ -42,19 +37,22 @@ const Footer = () => {
 	]
 
 	return (
-		<div className="footer border-t border-gray-50 border-solid border-2">
-			<div className='grid grid-cols-6'>
-				{
-					SNSData.map((item, i) => {
-						return (
-							<SNSIcon i={ i } src={ item.src } link={ item.link } SNS={ item.SNS } />
-						)
-					})
-				}
+		<footer className='text-center m-4'>
+			<div className="border-t-2 border-gray-100 border-solid">
+				<div className='grid grid-cols-6 m-12'>
+					{
+						SNSData.map((item, i) => {
+							return (
+								<SNSIcon i={ i } src={ item.src } link={ item.link } SNS={ item.SNS } />
+							)
+						})
+					}
+				</div>
 			</div>
-
-		</div>
-
+			<div>
+				&copy; 2023- Shunki Tada All rights reserved.
+			</div>
+		</footer>
 	)
 }
 

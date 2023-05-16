@@ -7,7 +7,7 @@ type Props = {
 
 const SNSIcon = (props: Props) => {
   return (
-    <div className="w-8 m-auto lg:w-16">
+    <div className="w-8 m-auto lg:w-12">
       <a
         href={ props.link }
         target="_blank"
