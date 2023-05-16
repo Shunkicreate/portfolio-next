@@ -6,6 +6,7 @@ import { GetServerSideProps } from 'next';
 import { promises as fs } from 'fs';
 import path from 'path';
 import Carousel from '../components/HomeCarousel';
+import Footer from '../components/Footer';
 
 type Props = {
 	imgs?: string[];
@@ -37,6 +38,7 @@ const Home = (props: Props) => {
 				<a href={ 'next-bus' } onClick={ (e) => { handleClick(e, 'next-bus') } }>next-bus</a>
 				<a href={ 'time-table' } onClick={ (e) => { handleClick(e, 'time-table') } }>time-table</a>
 			</main>
+			<Footer></Footer>
 
 			<footer className={ styles.footer }>
 				&copy; 2023- Shunki Tada All rights reserved.

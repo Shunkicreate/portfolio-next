@@ -13,5 +13,8 @@
 	"typescript.format.insertSpaceAfterConstructor": true,
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
 	"eslint.enable": true,
-	"eslint.format.enable": true
+	"eslint.format.enable": true,
+	"[xml]": {
+		"editor.defaultFormatter": "redhat.vscode-xml"
+	}
 }
