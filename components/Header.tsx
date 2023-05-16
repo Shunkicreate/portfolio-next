@@ -8,23 +8,38 @@ const Header = () => {
 		router.push(href)
 	}
 
+	const Pages = [
+		{
+			url: '/',
+			display: 'Home'
+		},
+		{
+			url: '/history',
+			display: 'History'
+		},
+		{
+			url: '/about',
+			display: 'About me'
+		},
+		{
+			url: '/contact',
+			display: 'Contact'
+		},
+	]
+
 	return (
-		<header className="shadow-sm">
-			<div id="nav">
-				<ul className="nav justify-content-end">
-					<li className="nav-item">
-						<a href={ '/' } className="nav-link" onClick={ (e) => { handleClick(e, 'next-bus') } } active-class="active-link">Home</a>
-					</li>
-					<li className="nav-item">
-						<a href={ '/history' } className="nav-link" onClick={ (e) => { handleClick(e, 'next-bus') } } active-class="active-link">History</a>
-					</li>
-					<li className="nav-item">
-						<a href={ '/about' } className="nav-link" onClick={ (e) => { handleClick(e, 'next-bus') } } active-class="active-link">About me</a>
-					</li>
-					<li className="nav-item">
-						<a href={ '/contact' } className="nav-link" onClick={ (e) => { handleClick(e, 'next-bus') } } active-class="active-link">Contact</a>
-					</li>
-				</ul>
+		<header className="drop-shadow-sm">
+			<div id="nav" className='flex m-16 justify-end	'>
+				{
+					Pages.map((page, i) => {
+						return (
+							<div key={ i } className='px-8 text-lg'>
+								<a href={ page.url } className="nav-link" onClick={ (e) => { handleClick(e, page.url) } } active-class="active-link">{ page.display }</a>
+							</div>
+						)
+
+					})
+				}
 			</div>
 		</header>
 	)
