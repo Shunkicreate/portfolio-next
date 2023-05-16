@@ -29,7 +29,7 @@ const Header = () => {
 
 	return (
 		<header className="drop-shadow-sm">
-			<div id="nav" className='flex m-16 justify-end	'>
+			<div className='flex m-16 justify-end	'>
 				{
 					Pages.map((page, i) => {
 						return (

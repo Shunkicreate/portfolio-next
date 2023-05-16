@@ -22,10 +22,8 @@ const HomeCarousel = (props: Props) => {
           return (
             <SwiperSlide key={ `${i}` }
             >
-              <Image
+              <img
                 src={ src }
-                width={ 640 }
-                height={ 400 }
                 alt="carousel image"
               />
             </SwiperSlide>

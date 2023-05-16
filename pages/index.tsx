@@ -8,6 +8,7 @@ import path from 'path';
 import Carousel from '../components/HomeCarousel';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import TopTitle from '../components/TopTitle';
 
 type Props = {
 	imgs?: string[];
@@ -35,8 +36,11 @@ const Home = (props: Props) => {
 	return (
 		<div className={ styles.container }>
 			<Header />
-			<main className={ styles.main }>
-				<Carousel imgs={ props.imgs }></Carousel>
+			<main className="w-full lg:w-2/4 mx-auto">
+				<TopTitle title='Home' />
+				<div className=' mx-auto'>
+					<Carousel imgs={ props.imgs } />
+				</div>
 				<a href={ 'next-bus' } onClick={ (e) => { handleClick(e, 'next-bus') } }>next-bus</a>
 				<a href={ 'time-table' } onClick={ (e) => { handleClick(e, 'time-table') } }>time-table</a>
 			</main>
