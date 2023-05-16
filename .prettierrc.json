@@ -1,11 +1,15 @@
 {
-    "printWidth": 120,
+	"printWidth": 140,
     "trailingComma": "es5",
-    "tabWidth": 4,
     "useTabs": true,
+    "tabWidth": 4,
     "semi": false,
     "singleQuote": true,
     "jsxSingleQuote": true,
     "endOfLine": "crlf",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "bracketSpacing": false,
+    "resolveGlobalModules": true,
+    "requireConfig": true,
+    "requirePragma": true
 }

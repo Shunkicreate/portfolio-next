@@ -1,48 +1,63 @@
 import { useRouter } from 'next/router';
-import { MouseEvent } from 'react';
+import { MouseEvent, useState } from 'react';
 
 const Header = () => {
 	const router = useRouter();
-	const handleClick = (e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>, href: string) => {
-		e.preventDefault()
-		router.push(href)
-	}
+	const [ClickState, setClickState] = useState(false);
+	const handleClick = async (e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>, href: string) => {
+		setClickState(true);
+		e.preventDefault();
+		await router.push(href);
+	};
 
 	const Pages = [
 		{
 			url: '/',
-			display: 'Home'
+			display: 'Home',
 		},
 		{
 			url: '/history',
-			display: 'History'
+			display: 'History',
 		},
 		{
 			url: '/about',
-			display: 'About me'
+			display: 'About me',
 		},
 		{
 			url: '/contact',
-			display: 'Contact'
+			display: 'Contact',
 		},
-	]
+	];
 
 	return (
-		<header className="filter drop-shadow-lg">
+		<header className='filter drop-shadow-lg'>
 			<div className='flex py-4 lg:my-16 justify-end mx-4'>
-				{
-					Pages.map((page, i) => {
-						return (
-							<div key={ i } className='mx-4 lg:mx-8 text-md font-semibold'>
-								<a href={ page.url } className="nav-link" onClick={ (e) => { handleClick(e, page.url) } } active-class="active-link">{ page.display }</a>
-							</div>
-						)
-
-					})
-				}
+				{Pages.map((page, i) => {
+					return (
+						<div key={i} className='mx-4 lg:mx-8 text-md font-semibold'>
+							<a
+								href={page.url}
+								className='nav-link'
+									onClick={(e) => {
+										handleClick(e, 'history')
+											.then(() => {
+												setClickState(false);
+											})
+											.catch((e) => {
+												// eslint-disable-next-line no-console
+												console.log(e);
+											});
+									}}
+								active-class='active-link'
+							>
+								{page.display}
+							</a>
+						</div>
+					);
+				})}
 			</div>
 		</header>
-	)
-}
+	);
+};
 
-export default Header
+export default Header;
