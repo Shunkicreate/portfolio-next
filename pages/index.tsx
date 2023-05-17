@@ -27,7 +27,6 @@ export const getStaticProps: GetStaticProps = async () => {
 		data: SNSType[]
 	}
 	const SNSContents = JSON.parse(SNSStringData) as SNSDataType
-	// const url = 'https://shunkis-portfolio.netlify.app/'
 	const getURL = async (url: string) => {
 		const ogps: { property: string, content: string }[] = []
 		await fetch(url).then(res => res.text()).then(text => {
@@ -39,10 +38,7 @@ export const getStaticProps: GetStaticProps = async () => {
 					const prop = v.getAttribute('property')
 					const content = v.getAttribute('content')
 					if (!prop || !content) return;
-					// eslint-disable-next-line no-console
-					// console.log(prop, content)
 					ogps.push({ 'property': prop, 'content': content })
-
 				})
 			}
 		})
@@ -61,8 +57,6 @@ export const getStaticProps: GetStaticProps = async () => {
 	const results = await Promise.all(requestArgs)
 	results.map((ogps, i) => {
 		ogps.map((ogp) => {
-			// eslint-disable-next-line no-console
-			console.log(ogp)
 			if (ogp.property == 'og:title') {
 				PropsSiteContents[i].ogpTitle = ogp.content
 			}
@@ -80,18 +74,6 @@ export const getStaticProps: GetStaticProps = async () => {
 			}
 		})
 	})
-	// let imgUrl = ''
-	// await getURL(url)
-	// 	.then((url) => {
-	// 		imgUrl = url
-	// 	})
-	// 	.catch((e) => {
-	// 		// eslint-disable-next-line no-console
-	// 		console.log(e)
-	// 	})
-
-	// eslint-disable-next-line no-console
-	console.log(PropsSiteContents)
 	const props: Props = {
 		imgs: fileContents,
 		SNSData: SNSContents.data,
@@ -101,6 +83,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		props: props,
 	};
 }
+
 const Home = (props: Props) => {
 	return (
 		<>
@@ -117,8 +100,6 @@ const Home = (props: Props) => {
 						)
 					})
 				}
-				{/* <a href={ 'next-bus' } onClick={ (e) => { handleClick(e, 'next-bus') } }>next-bus</a>
-				<a href={ 'time-table' } onClick={ (e) => { handleClick(e, 'time-table') } }>time-table</a> */}
 			</main>
 			<Footer SNSData={props.SNSData} />
 		</>
