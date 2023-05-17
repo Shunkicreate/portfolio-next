@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import { parse } from 'node-html-parser';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -15,7 +15,7 @@ type Props = {
 	siteData: SiteType[]
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
 	const imgDirectory = path.join(process.cwd(), 'public/carousel');
 	const fileContents = await fs.readdir(imgDirectory, 'utf8');
 	for (let i = 0; i < fileContents.length; ++i) {
