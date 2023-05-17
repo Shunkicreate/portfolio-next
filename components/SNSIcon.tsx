@@ -1,5 +1,4 @@
 type Props = {
-	i: number;
 	src: string;
 	link: string;
 	SNS: string;
