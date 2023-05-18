@@ -22,10 +22,10 @@
 		"plugin:react/jsx-runtime",
 		"plugin:@typescript-eslint/recommended-requiring-type-checking",
 		"plugin:import/warnings",
+		"prettier",
 		"plugin:@next/next/recommended",
-		// "next/core-web-vitals",
-		// "next",
-		"prettier"
+		"next/core-web-vitals",
+		"next"
 	],
 	"rules": {
 		"react-hooks/rules-of-hooks": "error",
@@ -53,11 +53,10 @@
 		"prettier/prettier": [
 			"error",
 			{
-				"semi": false,
+				"semi": true,
 				"singleQuote": true,
 				"trailingComma": "all",
-				"arrowParens": "always",
-				"endOfLine": "crlf"
+				"arrowParens": "always"
 			}
 		],
 		"import/order": [
@@ -68,5 +67,5 @@
 				}
 			}
 		]
-	}
+	},
 }
