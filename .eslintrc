@@ -56,7 +56,7 @@
 			"error",
 			{
 				"semi": true,
-				// "singleQuote": true,
+				"singleQuote": true,
 				"trailingComma": "all",
 				"arrowParens": "always"
 			}
