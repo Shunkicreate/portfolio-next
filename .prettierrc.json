@@ -6,10 +6,5 @@
     "semi": false,
     "singleQuote": true,
     "jsxSingleQuote": true,
-    "endOfLine": "crlf",
-    "editor.formatOnSave": true,
-    "bracketSpacing": false,
-    "resolveGlobalModules": true,
-    "requireConfig": true,
-    "requirePragma": true
+    "endOfLine": "crlf"
 }
