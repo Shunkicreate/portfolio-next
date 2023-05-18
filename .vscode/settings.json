@@ -16,7 +16,7 @@
 	"prettier.bracketSpacing": false,
 	"prettier.useTabs": true,
 	"prettier.tabWidth": 4,
-	"prettier.endOfLine": "lf",
+	"prettier.endOfLine": "crlf",
 	"prettier.requireConfig": true,
 	"prettier.requirePragma": true,
 	"prettier.semi": false
