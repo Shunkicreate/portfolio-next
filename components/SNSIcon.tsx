@@ -1,8 +1,8 @@
 type Props = {
-	src: string;
-	link: string;
-	SNS: string;
-};
+	src: string
+	link: string
+	SNS: string
+}
 
 const SNSIcon = (props: Props) => {
 	return (
@@ -11,7 +11,7 @@ const SNSIcon = (props: Props) => {
 				<img src={props.src} alt={props.SNS} />
 			</a>
 		</div>
-	);
-};
+	)
+}
 
-export default SNSIcon;
+export default SNSIcon

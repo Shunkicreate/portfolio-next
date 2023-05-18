@@ -84,7 +84,7 @@ const Home = (props: Props) => {
 				<div className='mx-auto'>
 					<Carousel imgs={props.imgs} />
 				</div>
-				
+
 				{props.siteData.map((site, i) => {
 					return (
 						<div key={i} className='my-4'>

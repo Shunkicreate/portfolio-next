@@ -1,14 +1,14 @@
-import { useRouter } from 'next/router';
-import { MouseEvent, useState } from 'react';
+import { useRouter } from 'next/router'
+import { MouseEvent, useState } from 'react'
 
 const Introduntion = () => {
-	const router = useRouter();
-	const [ClickState, setClickState] = useState(false);
+	const router = useRouter()
+	const [ClickState, setClickState] = useState(false)
 	const handleClick = async (e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>, href: string) => {
-		setClickState(true);
-		e.preventDefault();
-		await router.push(href);
-	};
+		setClickState(true)
+		e.preventDefault()
+		await router.push(href)
+	}
 	return (
 		<div className='introduction'>
 			<div className='container'>
@@ -22,18 +22,13 @@ const Introduntion = () => {
 								<h2 className='intro-title'>My first work</h2>
 							</div>
 							<div>
-								This is my first work in programming. I love Mario so much that I was obsessed with it
-								when I was a first year in college. The web site only works on a PC. The video is my
-								tweet. The video is my tweet.
+								This is my first work in programming. I love Mario so much that I was obsessed with it when I was a first
+								year in college. The web site only works on a PC. The video is my tweet. The video is my tweet.
 							</div>
 							<div className='col-md-12 text-start'>
 								<div className='row justify-content-evenly text-start'>
 									<div className='col-md-2 col-auto text'>
-										<a
-											target='_blank'
-											rel='noopener noreferrer'
-											href='https://mario-by-processing.netlify.app/'
-										>
+										<a target='_blank' rel='noopener noreferrer' href='https://mario-by-processing.netlify.app/'>
 											<button type='button' className='btn btn-outline-secondary'>
 												website
 											</button>
@@ -58,20 +53,12 @@ const Introduntion = () => {
 							<div className='col-md-12'>
 								<ul>
 									<li>
-										<a
-											href='https://beautiful-girl-ronaldico.netlify.app/'
-											target='_blank'
-											rel='noopener noreferrer'
-										>
+										<a href='https://beautiful-girl-ronaldico.netlify.app/' target='_blank' rel='noopener noreferrer'>
 											美女図鑑
 										</a>
 									</li>
 									<li>
-										<a
-											href='https://dabemon-go.glideapp.io/'
-											target='_blank'
-											rel='noopener noreferrer'
-										>
+										<a href='https://dabemon-go.glideapp.io/' target='_blank' rel='noopener noreferrer'>
 											ダベモン図鑑
 										</a>
 									</li>
@@ -81,11 +68,7 @@ const Introduntion = () => {
 										</a>
 									</li>
 									<li>
-										<a
-											href='https://water-canvas.netlify.app/'
-											target='_blank'
-											rel='noopener noreferrer'
-										>
+										<a href='https://water-canvas.netlify.app/' target='_blank' rel='noopener noreferrer'>
 											WATER CANVAS
 										</a>
 									</li>
@@ -122,8 +105,8 @@ const Introduntion = () => {
 							<div className='col-12 who-text'>
 								Shunki Tada is a programmer.
 								<br />
-								He can write basic HTML and CSS and he can create a website using Vue.js.Moreover, he is
-								familior with Python and C language.
+								He can write basic HTML and CSS and he can create a website using Vue.js.Moreover, he is familior with
+								Python and C language.
 							</div>
 							<div className='col-12'>
 								<a
@@ -131,12 +114,12 @@ const Introduntion = () => {
 									onClick={(e) => {
 										handleClick(e, 'history')
 											.then(() => {
-												setClickState(false);
+												setClickState(false)
 											})
 											.catch((e) => {
 												// eslint-disable-next-line no-console
-												console.log(e);
-											});
+												console.log(e)
+											})
 									}}
 									target='_top'
 									className='nav-link active'
@@ -150,7 +133,7 @@ const Introduntion = () => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default Introduntion;
+export default Introduntion

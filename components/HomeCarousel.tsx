@@ -1,14 +1,14 @@
-import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/scrollbar';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
+import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/scrollbar'
+import 'swiper/css/pagination'
+import 'swiper/css/effect-fade'
 
 type Props = {
-	imgs?: string[];
-};
+	imgs?: string[]
+}
 
 const HomeCarousel = (props: Props) => {
 	if (props.imgs) {
@@ -30,12 +30,12 @@ const HomeCarousel = (props: Props) => {
 						<SwiperSlide key={`${i}`}>
 							<img src={src} alt='carousel image' />
 						</SwiperSlide>
-					);
+					)
 				})}
 			</Swiper>
-		);
+		)
 	}
-	return <div>No Images</div>;
-};
+	return <div>No Images</div>
+}
 
-export default HomeCarousel;
+export default HomeCarousel

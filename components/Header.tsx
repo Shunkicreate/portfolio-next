@@ -1,13 +1,13 @@
-import { useRouter } from 'next/router';
-import { MouseEvent, useState } from 'react';
+import { useRouter } from 'next/router'
+import { MouseEvent, useState } from 'react'
 
 const Header = () => {
-	const router = useRouter();
-	const [ClickState, setClickState] = useState(false);
-	const handleClick = (e:MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>, href: string) => {
-		e.preventDefault();
-		void router.push(href);
-	};
+	const router = useRouter()
+	const [ClickState, setClickState] = useState(false)
+	const handleClick = (e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>, href: string) => {
+		e.preventDefault()
+		void router.push(href)
+	}
 
 	const Pages = [
 		{
@@ -26,7 +26,7 @@ const Header = () => {
 			url: '/contact',
 			display: 'Contact',
 		},
-	];
+	]
 
 	return (
 		<header className='filter drop-shadow-lg'>
@@ -37,19 +37,19 @@ const Header = () => {
 							<a
 								href={page.url}
 								className='nav-link'
-									onClick={(e) => {
-										handleClick(e, page.url)
-									}}
+								onClick={(e) => {
+									handleClick(e, page.url)
+								}}
 								active-class='active-link'
 							>
 								{page.display}
 							</a>
 						</div>
-					);
+					)
 				})}
 			</div>
 		</header>
-	);
-};
+	)
+}
 
-export default Header;
+export default Header
