@@ -1,38 +1,40 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-import { GetStaticProps } from 'next';
-import { parse } from 'node-html-parser';
-import Carousel from '../components/HomeCarousel';
-import SiteCard from '../components/SiteCard';
-import TopTitle from '../components/TopTitle';
-import { SNSType, SiteType } from '../types/globals.type';
+import { promises as fs } from 'fs'
+import path from 'path'
+import { GetStaticProps } from 'next'
+import { parse } from 'node-html-parser'
+import Carousel from '../components/HomeCarousel'
+import SiteCard from '../components/SiteCard'
+import TopTitle from '../components/TopTitle'
+import { SNSType, SiteType } from '../types/globals.type'
 
 type Props = {
-	imgs?: string[];
+	imgs?: string[]
 	siteData: SiteType[]
-};
+}
 
 export const getStaticProps: GetStaticProps = async () => {
-	const imgDirectory = path.join(process.cwd(), 'public/carousel');
-	const fileContents = await fs.readdir(imgDirectory, 'utf8');
+	const imgDirectory = path.join(process.cwd(), 'public/carousel')
+	const fileContents = await fs.readdir(imgDirectory, 'utf8')
 	for (let i = 0; i < fileContents.length; ++i) {
 		fileContents[i] = '/carousel/' + fileContents[i]
 	}
 	const getURL = async (url: string) => {
-		const ogps: { property: string, content: string }[] = []
-		await fetch(url).then(res => res.text()).then(text => {
-			const element = parse(text)
-			const headElement = element.querySelector('head');
-			if (headElement) {
-				const headEls = headElement.querySelectorAll('*')
-				Array.from(headEls).map(v => {
-					const prop = v.getAttribute('property')
-					const content = v.getAttribute('content')
-					if (!prop || !content) return;
-					ogps.push({ 'property': prop, 'content': content })
-				})
-			}
-		})
+		const ogps: { property: string; content: string }[] = []
+		await fetch(url)
+			.then((res) => res.text())
+			.then((text) => {
+				const element = parse(text)
+				const headElement = element.querySelector('head')
+				if (headElement) {
+					const headEls = headElement.querySelectorAll('*')
+					Array.from(headEls).map((v) => {
+						const prop = v.getAttribute('property')
+						const content = v.getAttribute('content')
+						if (!prop || !content) return
+						ogps.push({ property: prop, content: content })
+					})
+				}
+			})
 		return ogps
 	}
 	const siteDirectory = path.join(process.cwd(), 'sitedata.json')
@@ -42,7 +44,7 @@ export const getStaticProps: GetStaticProps = async () => {
 	const siteStringData = await fs.readFile(siteDirectory, 'utf8')
 	const siteContents = JSON.parse(siteStringData) as siteDataType
 	const requestArgs = siteContents.data.map((site) => {
-		return (getURL(site.url))
+		return getURL(site.url)
 	})
 	const PropsSiteContents = siteContents.data
 	const results = await Promise.all(requestArgs)
@@ -67,11 +69,11 @@ export const getStaticProps: GetStaticProps = async () => {
 	})
 	const props: Props = {
 		imgs: fileContents,
-		siteData: PropsSiteContents
-	};
+		siteData: PropsSiteContents,
+	}
 	return {
 		props: props,
-	};
+	}
 }
 
 const Home = (props: Props) => {
@@ -82,13 +84,14 @@ const Home = (props: Props) => {
 				<div className='mx-auto'>
 					<Carousel imgs={props.imgs} />
 				</div>
-				{
-					props.siteData.map((site, i) => {
-						return (
-							<SiteCard site={site} key={i}></SiteCard>
-						)
-					})
-				}
+				
+				{props.siteData.map((site, i) => {
+					return (
+						<div key={i} className='my-4'>
+							<SiteCard site={site} />
+						</div>
+					)
+				})}
 			</main>
 		</>
 	)

@@ -7,8 +7,8 @@ const SiteCard = (props: Props) => {
     const site = props.site
 
     return (
-        <div className='container mx-auto px-20'>
-            <div className='flex bg-white border border-gray-300 rounded-xl overflow-hidden items-center justify-start'>
+        <div className='container mx-auto'>
+            <div className='flex border border-gray-300 rounded-xl overflow-hidden items-center justify-start'>
                 <div className='relative w-60 h-32 flex-shrink-0'>
                     <a href={site.url}>
                         <div className='absolute left-0 top-0 w-full h-full flex items-center justify-center'>
@@ -16,7 +16,7 @@ const SiteCard = (props: Props) => {
                         </div>
                     </a>
                 </div>
-                <div className='p-4'>
+                <div className='p-8'>
                     <p className='text-lg line-clamp-1'>{site.ogpTitle}</p>
                     <p className='text-sm text-gray-500 mt-1 line-clamp-2'>{ site.ogpDescription }</p>
                     <span className='flex items-center justify-start text-gray-500'>
