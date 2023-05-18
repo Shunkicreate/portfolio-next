@@ -1,10 +1,10 @@
 {
-	"printWidth": 140,
+    "printWidth": 140,
     "trailingComma": "es5",
     "useTabs": true,
     "tabWidth": 4,
     "semi": false,
     "singleQuote": true,
     "jsxSingleQuote": true,
-    "endOfLine": "crlf"
+    "endOfLine": "lf"
 }

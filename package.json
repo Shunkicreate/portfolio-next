@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "eslint --fix .eslintrc.json --fix"
+    "lint:fix": "eslint --fix .eslintrc --fix"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",

@@ -1,6 +1,8 @@
 type Props = {
 	src: string
+
 	link: string
+
 	SNS: string
 }
 
