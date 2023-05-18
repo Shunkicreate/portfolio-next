@@ -13,27 +13,27 @@ type Props = {
 const AboutContent = (props: Props) => {
 	const ranks = props.content.rank
 	return (
-		<>
-			<div className='col-md-4'>
-				<div className='row justify-content-center content-title'>
-					<div className='col-12'>
-						<h3>{props.content.title}</h3>
-					</div>
+		<div className='border-2 border-[#6c757d] m-4 rounded flex text-center'>
+			<div className='w-1/3 border-r border-[#6c757d]'>
+				<div className='my-16 text-3xl font-medium'>
+					<h3>{props.content.title}</h3>
 				</div>
-				<div className='row justify-content-center'>
-					<div className='col-lg-4 col-md-8 col-6'>
-						<img src={props.content.src} alt={props.content.title + 'image'} className='w-16 h-16' />
-					</div>
+				<div className='my-16'>
+					<img src={props.content.src} alt={props.content.title + 'image'} className='w-16 h-16 m-auto' />
 				</div>
 			</div>
-			<div className='col-md-8 border-start border-secondary border-1 text-start'>
-				<ul className='lists'>
+			<div className='w-2/3 flex items-center content-center'>
+				<ul className='m-auto w-3/5 text-left list-disc'>
 					{ranks.map((rank, i) => {
-						return <li key={i}>{rank.content}</li>
+						return (
+							<li key={i} className='text-xl leading-loose'>
+								{rank.content}
+							</li>
+						)
 					})}
 				</ul>
 			</div>
-		</>
+		</div>
 	)
 }
 
