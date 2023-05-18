@@ -57,7 +57,7 @@
 				"singleQuote": true,
 				"trailingComma": "all",
 				"arrowParens": "always",
-				"endOfLine": "crlf"
+				"endOfLine": "lf"
 			}
 		],
 		"import/order": [
