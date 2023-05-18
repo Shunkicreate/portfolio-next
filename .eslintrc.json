@@ -23,8 +23,8 @@
 		"plugin:@typescript-eslint/recommended-requiring-type-checking",
 		"plugin:import/warnings",
 		"plugin:@next/next/recommended",
-		"next/core-web-vitals",
-		"next",
+		// "next/core-web-vitals",
+		// "next",
 		"prettier"
 	],
 	"rules": {

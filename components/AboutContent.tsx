@@ -1,5 +1,4 @@
-type rankType = {
-	rank: number
+type rankType = {	rank: number
 	content: string
 }
 type Props = {
