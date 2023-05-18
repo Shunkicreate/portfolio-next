@@ -19,6 +19,7 @@
 	"prettier.endOfLine": "crlf",
 	"prettier.requireConfig": true,
 	"prettier.requirePragma": true,
+	"prettier.semi": false
 	// "javascript.format.enable": true,
 	// "javascript.format.insertSpaceAfterCommaDelimiter": false,
 	// "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
