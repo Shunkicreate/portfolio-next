@@ -10,7 +10,7 @@ const Introduntion = () => {
 		await router.push(href);
 	};
 	return (
-		<div className="introduction">
+		<div className='introduction'>
 			<div className='container'>
 				<div className='row justify-content-center'>
 					<div className='col-10'>

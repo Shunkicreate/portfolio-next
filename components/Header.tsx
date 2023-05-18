@@ -4,10 +4,9 @@ import { MouseEvent, useState } from 'react';
 const Header = () => {
 	const router = useRouter();
 	const [ClickState, setClickState] = useState(false);
-	const handleClick = async (e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>, href: string) => {
-		setClickState(true);
+	const handleClick = (e:MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>, href: string) => {
 		e.preventDefault();
-		await router.push(href);
+		void router.push(href);
 	};
 
 	const Pages = [
@@ -39,14 +38,7 @@ const Header = () => {
 								href={page.url}
 								className='nav-link'
 									onClick={(e) => {
-										handleClick(e, 'history')
-											.then(() => {
-												setClickState(false);
-											})
-											.catch((e) => {
-												// eslint-disable-next-line no-console
-												console.log(e);
-											});
+										handleClick(e, page.url)
 									}}
 								active-class='active-link'
 							>

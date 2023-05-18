@@ -2,8 +2,6 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { GetStaticProps } from 'next';
 import { parse } from 'node-html-parser';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
 import Carousel from '../components/HomeCarousel';
 import SiteCard from '../components/SiteCard';
 import TopTitle from '../components/TopTitle';
@@ -11,7 +9,6 @@ import { SNSType, SiteType } from '../types/globals.type';
 
 type Props = {
 	imgs?: string[];
-	SNSData: SNSType[]
 	siteData: SiteType[]
 };
 
@@ -21,12 +18,6 @@ export const getStaticProps: GetStaticProps = async () => {
 	for (let i = 0; i < fileContents.length; ++i) {
 		fileContents[i] = '/carousel/' + fileContents[i]
 	}
-	const SNSDirectory = path.join(process.cwd(), 'SNSdata.json');
-	const SNSStringData = await fs.readFile(SNSDirectory, 'utf8')
-	type SNSDataType = {
-		data: SNSType[]
-	}
-	const SNSContents = JSON.parse(SNSStringData) as SNSDataType
 	const getURL = async (url: string) => {
 		const ogps: { property: string, content: string }[] = []
 		await fetch(url).then(res => res.text()).then(text => {
@@ -76,7 +67,6 @@ export const getStaticProps: GetStaticProps = async () => {
 	})
 	const props: Props = {
 		imgs: fileContents,
-		SNSData: SNSContents.data,
 		siteData: PropsSiteContents
 	};
 	return {
@@ -87,8 +77,7 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home = (props: Props) => {
 	return (
 		<>
-			<Header />
-			<main className="w-full md:w-3/4 lg:w-2/4 mx-auto">
+			<main className='w-full md:w-3/4 lg:w-2/4 mx-auto'>
 				<TopTitle title='Home' />
 				<div className='mx-auto'>
 					<Carousel imgs={props.imgs} />
@@ -101,7 +90,6 @@ const Home = (props: Props) => {
 					})
 				}
 			</main>
-			<Footer SNSData={props.SNSData} />
 		</>
 	)
 }
