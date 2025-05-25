@@ -1,21 +1,20 @@
-import { ReactNode } from 'react'
-import { SNSType } from '../types/globals.type'
+import { type ReactNode } from 'react'
+import { type SNSType } from '../types/globals.type'
 import Footer from './Footer'
 import Header from './Header'
 
-type Props = {
+interface LayoutProps {
 	children: ReactNode
 	SNSData: SNSType[]
 }
 
-const Layout = ({ children, SNSData }: Props) => {
+export default function Layout({ children, SNSData }: LayoutProps) {
 	return (
-		<>
-			<Header></Header>
-			{children}
-			<Footer SNSData={SNSData}></Footer>
-		</>
+		<div className='min-h-screen flex flex-col'>
+			<Header />
+			<div className='flex-grow'>{children}</div>
+			<Footer SNSData={SNSData} />
+		</div>
 	)
 }
 
-export default Layout

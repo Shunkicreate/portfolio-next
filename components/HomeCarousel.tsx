@@ -1,41 +1,70 @@
+'use client'
+
 import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import Image from 'next/image'
+import { useState } from 'react'
+
+// Swiperのスタイルを動的インポート
 import 'swiper/css'
 import 'swiper/css/navigation'
-import 'swiper/css/scrollbar'
 import 'swiper/css/pagination'
 import 'swiper/css/effect-fade'
 
-type Props = {
+interface HomeCarouselProps {
 	imgs?: string[]
 }
 
-const HomeCarousel = (props: Props) => {
-	if (props.imgs) {
+export default function HomeCarousel({ imgs }: HomeCarouselProps) {
+	const [isLoading, setIsLoading] = useState(true)
+
+	if (!imgs?.length) {
 		return (
+			<div className='w-full h-64 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg'>
+				<p className='text-gray-500 dark:text-gray-400'>No images available</p>
+			</div>
+		)
+	}
+
+	return (
+		<div className='relative w-full aspect-video'>
+			{isLoading && (
+				<div className='absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800'>
+					<div className='w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin' />
+				</div>
+			)}
 			<Swiper
 				spaceBetween={30}
-				effect={'fade'}
+				effect='fade'
 				autoplay={{
 					delay: 5000,
 					disableOnInteraction: false,
+					pauseOnMouseEnter: true,
 				}}
 				pagination={{
 					clickable: true,
+					dynamicBullets: true,
 				}}
+				navigation={true}
 				modules={[Autoplay, EffectFade, Navigation, Pagination]}
+				className='w-full h-full'
+				onSwiper={() => setIsLoading(false)}
 			>
-				{props.imgs.map((src: string, i: number) => {
-					return (
-						<SwiperSlide key={`${i}`}>
-							<img src={src} alt='carousel image' />
-						</SwiperSlide>
-					)
-				})}
+				{imgs.map((src, i) => (
+					<SwiperSlide key={src} className='relative'>
+						<Image
+							src={src}
+							alt={`Carousel image ${i + 1}`}
+							fill
+							sizes='(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw'
+							className='object-cover'
+							priority={i === 0}
+							onLoadingComplete={() => i === 0 && setIsLoading(false)}
+						/>
+					</SwiperSlide>
+				))}
 			</Swiper>
-		)
-	}
-	return <div>No Images</div>
+		</div>
+	)
 }
 
-export default HomeCarousel

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
@@ -17,14 +17,25 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "components/**/*",
-    "next.config.js"
+    "next.config.js",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

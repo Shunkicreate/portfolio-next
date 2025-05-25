@@ -1,23 +1,16 @@
 import { promises as fs } from 'fs'
 import path from 'path'
-import { GetStaticProps } from 'next'
 import { parse } from 'node-html-parser'
-import Carousel from '../components/HomeCarousel'
-import SiteCard from '../components/SiteCard'
-import TopTitle from '../components/TopTitle'
-import { SNSType, SiteType } from '../types/globals.type'
+import HomeContent from '../components/HomeContent'
+import { SiteType } from '../types/globals.type'
 
-type Props = {
-	imgs?: string[]
-	siteData: SiteType[]
-}
-
-export const getStaticProps: GetStaticProps = async () => {
+async function getCarouselImages() {
 	const imgDirectory = path.join(process.cwd(), 'public/carousel')
 	const fileContents = await fs.readdir(imgDirectory, 'utf8')
-	for (let i = 0; i < fileContents.length; ++i) {
-		fileContents[i] = '/carousel/' + fileContents[i]
-	}
+	return fileContents.map((file) => '/carousel/' + file)
+}
+
+async function getSiteData() {
 	const getURL = async (url: string) => {
 		const ogps: { property: string; content: string }[] = []
 		await fetch(url)
@@ -37,17 +30,15 @@ export const getStaticProps: GetStaticProps = async () => {
 			})
 		return ogps
 	}
+
 	const siteDirectory = path.join(process.cwd(), 'sitedata.json')
-	type siteDataType = {
-		data: SiteType[]
-	}
 	const siteStringData = await fs.readFile(siteDirectory, 'utf8')
-	const siteContents = JSON.parse(siteStringData) as siteDataType
-	const requestArgs = siteContents.data.map((site) => {
-		return getURL(site.url)
-	})
+	const siteContents = JSON.parse(siteStringData) as { data: SiteType[] }
 	const PropsSiteContents = siteContents.data
+
+	const requestArgs = siteContents.data.map((site) => getURL(site.url))
 	const results = await Promise.all(requestArgs)
+
 	results.map((ogps, i) => {
 		ogps.map((ogp) => {
 			if (ogp.property == 'og:title') {
@@ -67,34 +58,13 @@ export const getStaticProps: GetStaticProps = async () => {
 			}
 		})
 	})
-	const props: Props = {
-		imgs: fileContents,
-		siteData: PropsSiteContents,
-	}
-	return {
-		props: props,
-	}
+
+	return PropsSiteContents
 }
 
-const Home = (props: Props) => {
-	return (
-		<>
-			<main className='w-full md:w-3/4 lg:w-2/4 mx-auto'>
-				<TopTitle title='Home' />
-				<div className='mx-auto'>
-					<Carousel imgs={props.imgs} />
-				</div>
+export default async function Home() {
+	const [imgs, siteData] = await Promise.all([getCarouselImages(), getSiteData()])
 
-				{props.siteData.map((site, i) => {
-					return (
-						<div key={i} className='my-4'>
-							<SiteCard site={site} />
-						</div>
-					)
-				})}
-			</main>
-		</>
-	)
+	return <HomeContent imgs={imgs} siteData={siteData} />
 }
 
-export default Home
