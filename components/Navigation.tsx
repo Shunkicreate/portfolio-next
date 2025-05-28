@@ -15,7 +15,7 @@ const navItems = [
 	{ href: 'https://note.com/shunki_create', label: 'Note', isExternal: true },
 	{ href: 'https://qiita.com/Shunkicreate', label: 'Qiita', isExternal: true },
 	{ href: 'https://github.com/Shunkicreate', label: 'GitHub', isExternal: true },
-	{ href: 'https://twitter.com/shunki______', label: 'X (Twitter)', isExternal: true },
+	{ href: 'https://twitter.com/Shunkicreate', label: 'X (Twitter)', isExternal: true },
 ]
 
 export default function Navigation() {
@@ -76,7 +76,16 @@ export default function Navigation() {
 			}),
 		}
 
-		return item.isExternal ? <a {...linkProps}>{item.label}</a> : <Link {...linkProps}>{item.label}</Link>
+		const { key, ...rest } = linkProps
+		return item.isExternal ? (
+			<a key={key} {...rest}>
+				{item.label}
+			</a>
+		) : (
+			<Link key={key} {...rest}>
+				{item.label}
+			</Link>
+		)
 	}
 
 	return (

@@ -10,11 +10,11 @@ interface ThreeCanvasProps {
 
 export default function ThreeCanvas({ theme = 'light' }: ThreeCanvasProps) {
 	const containerRef = useRef<HTMLDivElement>(null)
-	const sceneRef = useRef<THREE.Scene>()
-	const cameraRef = useRef<THREE.PerspectiveCamera>()
-	const rendererRef = useRef<THREE.WebGLRenderer>()
-	const particlesRef = useRef<THREE.InstancedMesh>()
-	const animationRef = useRef<number>()
+	const sceneRef = useRef<THREE.Scene>(null)
+	const cameraRef = useRef<THREE.PerspectiveCamera>(null)
+	const rendererRef = useRef<THREE.WebGLRenderer>(null)
+	const particlesRef = useRef<THREE.InstancedMesh>(null)
+	const animationRef = useRef<number>(null)
 
 	// シーンの初期化
 	useEffect(() => {

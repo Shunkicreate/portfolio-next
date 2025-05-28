@@ -2,6 +2,7 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import { parse } from 'node-html-parser'
 import HomeContent from '../components/HomeContent'
+import HeroScene from '../components/HeroScene'
 import { SiteType } from '../types/globals.type'
 
 async function getCarouselImages() {
@@ -65,6 +66,11 @@ async function getSiteData() {
 export default async function Home() {
 	const [imgs, siteData] = await Promise.all([getCarouselImages(), getSiteData()])
 
-	return <HomeContent imgs={imgs} siteData={siteData} />
+	return (
+		<main>
+			<HeroScene />
+			<HomeContent imgs={imgs} siteData={siteData} />
+		</main>
+	)
 }
 
