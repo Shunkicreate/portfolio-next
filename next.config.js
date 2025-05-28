@@ -11,9 +11,14 @@ const nextConfig = {
 			'with-ai.netlify.app',
 			'busdes-kic.vercel.app',
 			'www.okayama-shikata-tandf.com',
+			'web-maracas.vercel.app',
+			'voice-pococha.com',
+			'topolly-prod.global.ssl.fastly.net',
 		],
 	},
 }
 
 module.exports = nextConfig
+
+
 

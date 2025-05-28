@@ -103,3 +103,46 @@
 	}
 }
 
+/* 雪のアニメーション */
+.snow-container {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.snow-container::before,
+.snow-container::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image: radial-gradient(circle at center, currentColor 1px, transparent 1px);
+	background-size: 50px 50px;
+	animation: snow-fall 10s linear infinite;
+	opacity: 0.5;
+}
+
+.snow-container::after {
+	animation-delay: -5s;
+	background-size: 40px 40px;
+	opacity: 0.3;
+}
+
+@keyframes snow-fall {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(100%);
+	}
+}
+
+/* アニメーション軽減設定時のスタイル */
+@media (prefers-reduced-motion: reduce) {
+	.snow-container::before,
+	.snow-container::after {
+		animation: none;
+		opacity: 0.2;
+	}
+}
+

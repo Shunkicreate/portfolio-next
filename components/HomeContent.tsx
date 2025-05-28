@@ -14,7 +14,7 @@ interface HomeContentProps {
 
 export default function HomeContent({ imgs, siteData }: HomeContentProps) {
 	const [isLoading, setIsLoading] = useState(true)
-
+	console.log('HomeContent rendered, isLoading:', isLoading)
 	return (
 		<>
 			{isLoading && <LoadingLogo onLoadingComplete={() => setIsLoading(false)} />}
@@ -35,3 +35,4 @@ export default function HomeContent({ imgs, siteData }: HomeContentProps) {
 		</>
 	)
 }
+

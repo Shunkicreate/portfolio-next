@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import { type SNSType } from '../types/globals.type'
 import { Noto_Serif_JP, Zen_Old_Mincho, Inter } from 'next/font/google'
 import { ThemeProvider } from '../components/theme-provider'
+import Navigation from '@/components/Navigation'
 
 const notoSerifJP = Noto_Serif_JP({
 	subsets: ['latin'],
@@ -27,8 +28,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-	title: 'Shunki Create Portfolio',
-	description: '田田俊輝のポートフォリオサイト',
+	title: 'Shunki Create',
+	description: 'Portfolio site of Shunki Tada',
 }
 
 const SNSData: SNSType[] = [
@@ -66,10 +67,13 @@ const SNSData: SNSType[] = [
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang='ja' className={`${notoSerifJP.variable} ${zenOldMincho.variable} ${inter.variable}`} suppressHydrationWarning>
+		<html lang='en' className={`${notoSerifJP.variable} ${zenOldMincho.variable} ${inter.variable}`} suppressHydrationWarning>
 			<body>
-				<ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-					<Layout SNSData={SNSData}>{children}</Layout>
+				<ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+					<Navigation />
+					<main className='min-h-screen pt-16'>
+						<Layout SNSData={SNSData}>{children}</Layout>
+					</main>
 				</ThemeProvider>
 			</body>
 		</html>

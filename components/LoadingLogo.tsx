@@ -42,8 +42,7 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 			.then((res) => res.text())
 			.then((svgMarkup) => {
 				if (!wrapperRef.current) return
-				wrapperRef.current.innerHTML = svgMarkup // ← ここがポイント
-
+				wrapperRef.current.innerHTML = svgMarkup
 				const paths = wrapperRef.current.querySelectorAll('path')
 				setPathsCount(paths.length)
 				paths.forEach((path, idx) => {
@@ -65,14 +64,13 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 			})
 	}, []) // 依存配列を空にして、マウント時に1回だけ実行
 
-
 	// アニメーションの表示制御
 
 	/* 表示制御 */
 	useEffect(() => {
 		setIsVisible(true)
 
-		const total = isReducedMotion ? 800 : DRAW_MS + DELAY_STEP_MS * (pathsCount - 1) + EXTRA_MS // ← 計算済み
+		const total = isReducedMotion ? 800 : DRAW_MS + DELAY_STEP_MS * (pathsCount - 1) + EXTRA_MS
 
 		const timer = setTimeout(() => {
 			setIsVisible(false)
@@ -91,5 +89,3 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 		</div>
 	)
 }
-
-

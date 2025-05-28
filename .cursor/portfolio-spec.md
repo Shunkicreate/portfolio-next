@@ -43,20 +43,20 @@
 
 ### About (内容草案)
 
--   氏名: 田田 俊輝 (Shunki Tada)
+-   氏名: 多田 駿希 (Shunki Tada)
 -   学歴: 松山東高校 → 立命館大学 情報理工学部 卒
 -   職歴: 株式会社 DeNA — Voice Pococha 開発担当
 -   ブログ: Note / Qiita
 
 ## 4. Projects ― 一覧カード（トップ 5）
 
-| Thumbnail | Title & Link                 | 技術スタック / ポイント                                                |
-| --------- | ---------------------------- | ---------------------------------------------------------------------- |
-|           | Water Canvas                 | Three.js × GLSL。水面シェーダで任意画像を水彩風に描写。                |
-|           | 岡山大学医学部陸上部 公式 HP | Astro SSG → Next 13 へ移行予定。フォームに Elastic Email API。         |
-|           | Banmeshi                     | Next.js / App Router・Firebase Auth。レコメンド API は Go Clean Arch。 |
-|           | Web‑Maracas                  | PWA。Device Motion API でスマホを振って音を鳴らす。Latency < 50 ms。   |
-|           | Voice Pococha                | DeNA ライブ配信サービス。Flutter Web SDK 組み込み PoC を担当。         |
+| Thumbnail | Title & Link                 |
+| --------- | ---------------------------- |
+|           | Water Canvas                 |
+|           | 岡山大学医学部陸上部 公式 HP |
+|           | Banmeshi                     |
+|           | Web‑Maracas                  |
+|           | Voice Pococha                |
 
 🔗 Read More — Busdes!, Processing Mario, Dabemon GO などを折り畳み表示。
 
