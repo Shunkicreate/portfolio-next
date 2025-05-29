@@ -18,10 +18,10 @@ const moveWaveGLSL = `
       float y = 0.0;
       // 丘陵のような起伏
       y += sin(p.x * 0.005) * 50.0;
-      // 大きなうねり（弱め）
-      y += sin(p.x * 0.04) * 2.0;
-      // 等間隔の風紋（高さを上げる）
-      y += sin(p.x * 8.0) * 1.5;
+      // 大きなうねり（弱め、z方向にもずらす）
+      y += sin(p.x * 0.04 + p.z * 0.02) * 2.0;
+      // 等間隔の風紋（z方向で位相をずらす）
+      y += sin(p.x * 8.0 + p.z * 0.2) * 1.5;
       y += sin(p.x * 16.0) * 0.2;
       y += sin(p.x * 32.0) * 0.1;
       retVal.y = y;
@@ -186,5 +186,4 @@ export default function HeroScene() {
 		</div>
 	)
 }
-
 
