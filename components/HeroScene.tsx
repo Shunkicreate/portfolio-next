@@ -1,9 +1,16 @@
 // @ts-nocheck
 'use client'
-import { Suspense, useRef, useMemo, useLayoutEffect } from 'react'
+import { Suspense, useRef, useMemo, useLayoutEffect, useState, useEffect } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, Points, PointMaterial } from '@react-three/drei'
 import * as THREE from 'three'
+import SnowParticles from './SnowParticles'
+import dynamic from 'next/dynamic'
+import { Star, parseStars } from '../utils/parseStars'
+import StarField from './StarField'
+
+// StarCanvasをクライアントサイドのみで読み込む
+const StarCanvas = dynamic(() => import('./StarCanvas'), { ssr: false })
 
 // Constants from the original example
 const GRD_SIZE = 2000 // Planeのサイズを大きく
@@ -21,7 +28,7 @@ const moveWaveGLSL = `
       // 大きなうねり（弱め、z方向にもずらす）
       y += sin(p.x * 0.04 + p.z * 0.02) * 2.0;
       // 等間隔の風紋（z方向で位相をずらす）
-      y += sin(p.x * 8.0 + p.z * 0.2) * 1.5;
+      y += sin(p.x * 8.0) * 1.5;
       y += sin(p.x * 16.0) * 0.2;
       y += sin(p.x * 32.0) * 0.1;
       retVal.y = y;
@@ -167,22 +174,36 @@ function OceanSurface() {
 
 // Main Scene Component
 export default function HeroScene() {
+	const [stars, setStars] = useState<Star[]>([])
+
+	useEffect(() => {
+		fetch('/stars_mag4.csv')
+			.then((res) => res.text())
+			.then((txt) => setStars(parseStars(txt)))
+			.catch((err) => console.error('星データ読み込みエラー', err))
+	}, [])
+
 	return (
-		<div className='w-full h-screen'>
-			<Canvas
-				camera={{ position: [0, 150, 350], fov: 55, near: 1, far: 15000 }}
-				onCreated={({ gl }) => {
-					gl.outputEncoding = THREE.sRGBEncoding
-				}}
-			>
-				<color attach='background' args={[0xcccccc]} />
-				<Suspense fallback={null}>
-					<OceanSurface />
-				</Suspense>
-				<ambientLight intensity={0.5} />
-				<directionalLight color={0xffffff} intensity={1.0} position={[0, 2000, 0]} />
-				<OrbitControls target={[0, 0, 0]} minDistance={50} maxDistance={2000} />
-			</Canvas>
+		<div className='w-full h-screen relative'>
+			{/* メインシーン */}
+			<div className='absolute inset-0 z-10'>
+				<Canvas
+					camera={{ position: [0, 150, 350], fov: 55, near: 1, far: 15000 }}
+					onCreated={({ gl }) => {
+						gl.outputEncoding = THREE.sRGBEncoding
+					}}
+				>
+					<StarField stars={stars} sphereRadius={200} />
+					<color attach='background' args={['#1a1a2e']} />
+					<Suspense fallback={null}>
+						<OceanSurface />
+						<SnowParticles count={2000} area={2000} />
+					</Suspense>
+					<ambientLight intensity={0.5} color={'#ffffff'} />
+					<directionalLight color={'#ffffff'} intensity={1.0} position={[0, 2000, 0]} castShadow />
+					<OrbitControls target={[0, 0, 0]} minDistance={50} maxDistance={2000} />
+				</Canvas>
+			</div>
 		</div>
 	)
 }
