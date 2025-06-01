@@ -1,46 +1,30 @@
-// components/StarField.tsx
+// @ts-nocheck
 'use client'
-import React, { FC, useMemo } from 'react'
-import * as THREE from 'three'
-import { BufferGeometry, Float32BufferAttribute, PointsMaterial } from 'three'
+import React, { FC } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import { StarPoints } from './StarPoints'
+import { StarMaterial } from './StarMaterial'
 import { Star } from '../utils/parseStars'
+
+// 星の大きさの設定
+const STAR_MIN_SIZE = 2.0 // 最小サイズ（ピクセル単位）
+const STAR_MAX_SIZE = 50 // 最大サイズ（ピクセル単位）
+const STAR_OPACITY = 0.9 // 星の不透明度
 
 interface StarFieldProps {
 	stars: Star[]
-	sphereRadius?: number
+	sphereRadius: number
 }
 
-/**
- * BufferGeometry + PointsMaterial を使った軽量星空レンダリング
- */
-const StarField: FC<StarFieldProps> = ({ stars, sphereRadius = 100 }) => {
-	const geometry = useMemo(() => {
-		const positions = new Float32Array(stars.length * 3)
-		stars.forEach((star, i) => {
-			const ra = (star.raDeg * Math.PI) / 180
-			const dec = (star.decDeg * Math.PI) / 180
-			const cosDec = Math.cos(dec)
-			positions[3 * i] = sphereRadius * cosDec * Math.cos(ra)
-			positions[3 * i + 1] = sphereRadius * cosDec * Math.sin(ra)
-			positions[3 * i + 2] = sphereRadius * Math.sin(dec)
-		})
-		const geo = new BufferGeometry()
-		geo.setAttribute('position', new Float32BufferAttribute(positions, 3))
-		return geo
-	}, [stars, sphereRadius])
-
-	const material = useMemo(() => {
-		return new PointsMaterial({
-			color: 0xffffff,
-			size: 3,
-			sizeAttenuation: true,
-			transparent: true,
-			opacity: 0.9,
-			depthWrite: false,
-		})
-	}, [])
-
-	return <points geometry={geometry} material={material} />
+export const StarField: FC<StarFieldProps> = ({ stars, sphereRadius }) => {
+	return (
+		<>
+			<ambientLight intensity={0.2} />
+			<StarPoints stars={stars} sphereRadius={sphereRadius} />
+			<StarMaterial minSize={STAR_MIN_SIZE} maxSize={STAR_MAX_SIZE} opacity={STAR_OPACITY} />
+			<OrbitControls enableZoom />
+		</>
+	)
 }
 
-export default StarField

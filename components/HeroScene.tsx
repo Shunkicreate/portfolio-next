@@ -7,10 +7,7 @@ import * as THREE from 'three'
 import SnowParticles from './SnowParticles'
 import dynamic from 'next/dynamic'
 import { Star, parseStars } from '../utils/parseStars'
-import StarField from './StarField'
-
-// StarCanvasをクライアントサイドのみで読み込む
-const StarCanvas = dynamic(() => import('./StarCanvas'), { ssr: false })
+import { StarField } from './StarField'
 
 // Constants from the original example
 const GRD_SIZE = 2000 // Planeのサイズを大きく
@@ -177,27 +174,28 @@ export default function HeroScene() {
 	const [stars, setStars] = useState<Star[]>([])
 
 	useEffect(() => {
-		fetch('/stars_mag4.csv')
-			.then((res) => res.text())
-			.then((txt) => setStars(parseStars(txt)))
-			.catch((err) => console.error('星データ読み込みエラー', err))
+		fetch('/stars_mag6.csv')
+			.then((r) => r.text())
+			.then((t) => setStars(parseStars(t)))
 	}, [])
 
 	return (
 		<div className='w-full h-screen relative'>
-			{/* メインシーン */}
 			<div className='absolute inset-0 z-10'>
 				<Canvas
 					camera={{ position: [0, 150, 350], fov: 55, near: 1, far: 15000 }}
 					onCreated={({ gl }) => {
-						gl.outputEncoding = THREE.sRGBEncoding
+						// gl.outputEncoding = THREE.sRGBEncoding
+						if (gl.outputColorSpace !== undefined) {
+							gl.outputColorSpace = THREE.SRGBColorSpace
+						}
 					}}
 				>
 					<StarField stars={stars} sphereRadius={200} />
 					<color attach='background' args={['#1a1a2e']} />
 					<Suspense fallback={null}>
 						<OceanSurface />
-						<SnowParticles count={2000} area={2000} />
+						{/* <SnowParticles count={2000} area={2000} /> */}
 					</Suspense>
 					<ambientLight intensity={0.5} color={'#ffffff'} />
 					<directionalLight color={'#ffffff'} intensity={1.0} position={[0, 2000, 0]} castShadow />

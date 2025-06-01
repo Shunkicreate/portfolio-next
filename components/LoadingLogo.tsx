@@ -74,7 +74,6 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 				${isVisible ? 'opacity-100' : 'opacity-0'}`}
 		>
 			ローディング専用CSSをインラインで埋め込む
-
 		</div>
 	)
 }
