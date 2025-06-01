@@ -34,11 +34,17 @@ export default function HeroScene() {
 				<color attach='background' args={['#1a1a2e']} />
 				<ambientLight intensity={0.5} color='#ffffff' />
 				<directionalLight color='#ffffff' intensity={1.0} position={[0, 2000, 0]} castShadow />
-				<OrbitControls target={[0, 0, 0]} minDistance={50} maxDistance={2000} />
+				<OrbitControls
+					target={[0, 100, 0]}
+					minDistance={50}
+					maxDistance={2000}
+					autoRotate={true}
+					autoRotateSpeed={0.5}
+				/>
 				{/* 星のフィールドを Suspense でラップ */}
 				<Suspense fallback={null}>
 					<StarField stars={stars} sphereRadius={200} />
-					<SnowParticles count={1000} area={2000} />
+					<SnowParticles count={500} area={2000} />
 				</Suspense>
 			</Canvas>
 		</div>

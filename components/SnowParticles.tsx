@@ -8,7 +8,7 @@ function SnowParticles({ count = 2000, area = 2000, radius = 2 }) {
 	const SPHERE_SEGMENTS = 8
 	const SNOW_OPACITY = 0.8
 	const SNOW_COLOR = '#ffffff'
-	const GROUND_LEVEL = 0
+	const GROUND_LEVEL = -100
 
 	// 初期位置を保持する Float32Array
 	const positions = useMemo(() => {
