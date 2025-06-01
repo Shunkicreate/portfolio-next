@@ -63,3 +63,4 @@ export const StarMaterial: FC = () => {
 
 	return <primitive object={mat} attach='material' />
 }
+

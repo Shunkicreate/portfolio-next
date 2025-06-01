@@ -2,8 +2,8 @@
 'use client'
 import React, { FC, useMemo } from 'react'
 import { BufferGeometry, Float32BufferAttribute, MathUtils } from 'three'
-import { Star } from '../utils/parseStars'
-import { starColor } from '../utils/starColor'
+import { Star } from '../../utils/star/parseStars'
+import { starColor } from '../../utils/star/starColor'
 import { StarMaterial } from './StarMaterial'
 
 interface StarPointsProps {

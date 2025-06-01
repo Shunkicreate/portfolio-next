@@ -25,3 +25,4 @@ export const parseStars = (text: string): Star[] => {
 		spType: r.SpType.trim(),
 	}))
 }
+

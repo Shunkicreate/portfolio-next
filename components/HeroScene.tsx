@@ -6,8 +6,8 @@ import { OrbitControls, Points, PointMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 import SnowParticles from './SnowParticles'
 import dynamic from 'next/dynamic'
-import { Star, parseStars } from '../utils/parseStars'
-import { StarField } from './StarField'
+import { Star, parseStars } from '../utils/star/parseStars'
+import { StarField } from './star/StarField'
 
 // Constants from the original example
 const GRD_SIZE = 2000 // Planeのサイズを大きく

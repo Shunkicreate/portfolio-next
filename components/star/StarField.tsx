@@ -5,7 +5,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { StarPoints } from './StarPoints'
 import { StarMaterial } from './StarMaterial'
-import { Star } from '../utils/parseStars'
+import { Star } from '../../utils/star/parseStars'
 
 // 星の大きさの設定
 const STAR_MIN_SIZE = 2.0 // 最小サイズ（ピクセル単位）
