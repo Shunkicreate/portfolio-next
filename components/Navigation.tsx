@@ -24,12 +24,11 @@ export default function Navigation() {
 	const { theme, setTheme } = useTheme()
 	const pathname = usePathname()
 
-	// ハイドレーション対策
+	// Hydration 対策：クライアントマウント後に true にする
 	useEffect(() => {
 		setMounted(true)
 	}, [])
 
-	// スクロール時のメニュー制御を改善
 	const handleScroll = useCallback(() => {
 		if (isOpen && window.scrollY > 100) {
 			setIsOpen(false)
@@ -42,81 +41,80 @@ export default function Navigation() {
 		return () => window.removeEventListener('scroll', handleScroll)
 	}, [handleScroll])
 
-	// モバイルメニューの制御を改善
 	const toggleMenu = useCallback(() => {
 		setIsOpen((prev) => {
-			const newState = !prev
-			document.body.style.overflow = newState ? 'hidden' : ''
-			return newState
+			const next = !prev
+			document.body.style.overflow = next ? 'hidden' : ''
+			return next
 		})
 	}, [])
 
-	// メニューを閉じる処理
 	const closeMenu = useCallback(() => {
 		setIsOpen(false)
 		document.body.style.overflow = ''
 	}, [])
 
-	// テーマ切り替え
 	const toggleTheme = () => {
 		setTheme(theme === 'dark' ? 'light' : 'dark')
 	}
 
-	// リンクコンポーネントのレンダリング
 	const renderLink = (item: (typeof navItems)[0]) => {
-		const linkProps = {
-			key: item.href,
+		const baseProps = {
 			href: item.href,
-			className: `text-sm font-medium transition-colors hover:text-primary ${
-				pathname === item.href ? 'text-primary' : 'text-foreground/60'
-			}`,
-			...(item.isExternal && {
-				target: '_blank',
-				rel: 'noopener noreferrer',
-			}),
+			className: `text-sm ${pathname === item.href ? 'text-primary' : 'text-foreground/60'}`,
+			...(item.isExternal && { target: '_blank', rel: 'noopener noreferrer' }),
+			children: item.label,
 		}
-
-		const { key, ...rest } = linkProps
-		return item.isExternal ? (
-			<a key={key} {...rest}>
-				{item.label}
-			</a>
-		) : (
-			<Link key={key} {...rest}>
-				{item.label}
-			</Link>
-		)
+		if (item.isExternal) {
+			return <a key={item.href} {...baseProps} />
+		}
+		return <Link key={item.href} {...baseProps} />
 	}
 
 	return (
 		<nav className='fixed top-0 z-50 w-full bg-background/80 backdrop-blur-sm border-b border-border'>
 			<div className='container mx-auto px-4'>
 				<div className='flex h-16 items-center justify-between'>
-					{/* ロゴ */}
 					<Link href='/' className='text-xl font-bold text-foreground hover:text-primary transition-colors' aria-label='Home'>
 						Shunki Create
 					</Link>
 
-					{/* デスクトップナビゲーション */}
 					<div className='hidden md:flex md:items-center md:space-x-8'>
 						{navItems.filter((item) => !item.isExternal).map(renderLink)}
 						<button
 							onClick={toggleTheme}
 							className='p-2 text-foreground/60 hover:text-primary transition-colors'
-							aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+							// mounted が false の間はダミーの aria-label（たとえば "Toggle theme"）を入れておく
+							aria-label={mounted ? `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme` : 'Toggle theme'}
 						>
-							{mounted && (theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />)}
+							{mounted ? (
+								theme === 'dark' ? (
+									<Sun size={20} />
+								) : (
+									<Moon size={20} />
+								)
+							) : (
+								// マウント前はアイコンも出さないか、スケルトンを出す
+								<span className='block w-5 h-5 bg-foreground/10 rounded' />
+							)}
 						</button>
 					</div>
 
-					{/* モバイルメニューボタン */}
 					<div className='flex md:hidden'>
 						<button
 							onClick={toggleTheme}
 							className='p-2 text-foreground/60 hover:text-primary transition-colors'
-							aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+							aria-label={mounted ? `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme` : 'Toggle theme'}
 						>
-							{mounted && (theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />)}
+							{mounted ? (
+								theme === 'dark' ? (
+									<Sun size={20} />
+								) : (
+									<Moon size={20} />
+								)
+							) : (
+								<span className='block w-5 h-5 bg-foreground/10 rounded' />
+							)}
 						</button>
 						<button
 							onClick={toggleMenu}
@@ -130,14 +128,12 @@ export default function Navigation() {
 				</div>
 			</div>
 
-			{/* モバイルメニュー */}
 			<div
 				className={`fixed inset-0 z-50 w-screen h-screen bg-background/95 backdrop-blur-sm transition-opacity duration-300 ease-in-out md:hidden ${
 					isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
 				}`}
 			>
 				<div className='flex flex-col h-full'>
-					{/* メニューヘッダー */}
 					<div className='flex items-center justify-between p-4 border-b border-border'>
 						<h2 className='text-xl font-semibold'>Menu</h2>
 						<button
@@ -148,10 +144,8 @@ export default function Navigation() {
 							<X size={24} />
 						</button>
 					</div>
-					{/* メニュー項目 */}
 					<div className='flex-1 overflow-y-auto px-6 py-8'>
 						<div className='grid gap-6'>
-							{/* 内部リンク */}
 							<div className='space-y-4'>
 								<h3 className='text-sm font-medium text-foreground/40 uppercase tracking-wider'>Pages</h3>
 								<div className='grid gap-2'>
@@ -173,7 +167,6 @@ export default function Navigation() {
 										))}
 								</div>
 							</div>
-							{/* 外部リンク */}
 							<div className='space-y-4'>
 								<h3 className='text-sm font-medium text-foreground/40 uppercase tracking-wider'>External Links</h3>
 								<div className='grid gap-2'>

@@ -19,7 +19,7 @@ export default function SiteCard({ site }: SiteCardProps) {
 						href={site.url}
 						target='_blank'
 						rel='noopener noreferrer'
-						className='block w-full h-full'
+						className='block relative w-full h-full'
 						aria-label={`Visit ${site.ogpTitle || ''}`}
 					>
 						{isImageLoading && <div className='absolute inset-0 bg-gray-100 dark:bg-gray-800 animate-pulse' />}
@@ -29,7 +29,7 @@ export default function SiteCard({ site }: SiteCardProps) {
 							fill
 							sizes='(max-width: 640px) 100vw, 240px'
 							className='object-cover'
-							onLoadingComplete={() => setIsImageLoading(false)}
+							onLoad={() => setIsImageLoading(false)}
 							priority={false}
 						/>
 					</a>
