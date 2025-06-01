@@ -1,13 +1,15 @@
 'use client'
 import { useLoader } from '@react-three/fiber'
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, useLayoutEffect } from 'react'
 import * as THREE from 'three'
 
-const GRD_SIZE = 2000
+// 定数の設定
+const GRD_SIZE = 4000
 const SEG_NUM = 120
 const GRD_RCS = 1
-const WATER_NORMAL_SRC = 'https://threejs.org/examples/textures/waternormals.jpg'
+const SAND_NORMAL_SRC = 'https://threejs.org/examples/textures/waternormals.jpg'
 
+// GLSL関数
 const moveWaveGLSL = `
   vec3 moveWave(vec3 p, float time_val, float grid_val){
       vec3 retVal = vec3(p.x, 0.0, p.z);
@@ -22,7 +24,8 @@ const moveWaveGLSL = `
   }
 `
 
-interface DeseartTileProps {
+// Propsタイプ
+interface DesertTileProps {
 	tilePosition: [number, number, number]
 	timeUniform: React.MutableRefObject<{ value: number }>
 	gridSize: number
@@ -36,7 +39,8 @@ interface Shader {
 	fragmentShader: string
 }
 
-function DeseartTile({ tilePosition, timeUniform, gridSize, segments, normalMap }: DeseartTileProps) {
+// タイルコンポーネント
+function DesertTile({ tilePosition, timeUniform, gridSize, segments, normalMap }: DesertTileProps) {
 	const materialRef = useRef<THREE.MeshStandardMaterial | null>(null)
 
 	const geometry = useMemo(() => {
@@ -45,8 +49,8 @@ function DeseartTile({ tilePosition, timeUniform, gridSize, segments, normalMap 
 		return geo
 	}, [gridSize, segments])
 
-	// 砂丘の波打ち表現
-	useMemo(() => {
+	// Shaderの設定
+	useLayoutEffect(() => {
 		if (materialRef.current) {
 			materialRef.current.onBeforeCompile = (shader: Shader) => {
 				shader.uniforms.time = timeUniform.current
@@ -78,7 +82,7 @@ function DeseartTile({ tilePosition, timeUniform, gridSize, segments, normalMap 
             vec3 displacedBitangent = neighbor2Pos - wavePos_for_normal;
 
             objectNormal = normalize(cross(displacedBitangent, displacedTangent));
-          `,
+          `
 					)
 					.replace(
 						'#include <begin_vertex>',
@@ -87,7 +91,7 @@ function DeseartTile({ tilePosition, timeUniform, gridSize, segments, normalMap 
             vec3 wavePosition_for_vertex = moveWave(p_for_vertex, time, grid);
             transformed = vec3(p_for_vertex.x, wavePosition_for_vertex.y, p_for_vertex.z);
             vHeight = wavePosition_for_vertex.y;
-          `,
+          `
 					)
 
 				shader.fragmentShader = `
@@ -100,12 +104,12 @@ function DeseartTile({ tilePosition, timeUniform, gridSize, segments, normalMap 
             if (vHeight > 4.0) {
               diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.95, 0.92, 0.8), smoothstep(4.0, 7.0, vHeight));
             }
-          `,
+          `
 				)
 			}
 			materialRef.current.needsUpdate = true
 		}
-	}, [timeUniform, gridSize])
+	}, [timeUniform, gridSize, normalMap])
 
 	return (
 		<mesh position={tilePosition} geometry={geometry}>
@@ -114,13 +118,14 @@ function DeseartTile({ tilePosition, timeUniform, gridSize, segments, normalMap 
 	)
 }
 
-export function DeseartSurface() {
-	const waterNormals = useLoader(THREE.TextureLoader, WATER_NORMAL_SRC)
+// 表面コンポーネント
+export function DesertSurface() {
+	const sandNormals = useLoader(THREE.TextureLoader, SAND_NORMAL_SRC)
 
 	useMemo(() => {
-		waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping
-		waterNormals.repeat.set(1, 1)
-	}, [waterNormals])
+		sandNormals.wrapS = sandNormals.wrapT = THREE.RepeatWrapping
+		sandNormals.repeat.set(1, 1)
+	}, [sandNormals])
 
 	const time = useRef<{ value: number }>({ value: 0 })
 
@@ -143,13 +148,13 @@ export function DeseartSurface() {
 	return (
 		<group>
 			{tiles.map((tile) => (
-				<DeseartTile
+				<DesertTile
 					key={tile.id}
 					tilePosition={tile.position}
 					timeUniform={time}
 					gridSize={GRD_SIZE}
 					segments={SEG_NUM}
-					normalMap={waterNormals}
+					normalMap={sandNormals}
 				/>
 			))}
 		</group>

@@ -2,35 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-	padding: 0;
-	margin: 0;
-	font-family: serif, system-ui, LinotypeUnivers-430Regular, 'Gothic Medium BBB', 游ゴシック, 'Yu Gothic', 游ゴシック体, YuGothic,
-		'ヒラギノ角ゴ Pro W3', メイリオ, Meiryo, 'MS P ゴシック', 'MS PGothic', sans-serif;
-	color: #2c3e50;
-	background-color: #efeff0;
-}
-
-a {
-	color: inherit;
-	text-decoration: none;
-}
-a:visited {
-	color: #2c3e50;
-}
-a:link {
-	color: #2c3e50;
-}
-a:hover {
-	color: #c9c8c8;
-	transition: 0.5s;
-}
-
-* {
-	box-sizing: border-box;
-}
-
 #root svg {
 	width: 100%;
 	height: 100%;

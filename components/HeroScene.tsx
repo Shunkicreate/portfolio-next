@@ -2,13 +2,16 @@
 'use client'
 import { OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
+import { useTheme } from 'next-themes'
 import { Suspense, useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { Star, parseStars } from '../utils/star/parseStars'
 import SnowParticles from './SnowParticles'
 import { StarField } from './star/StarField'
+import { DesertSurface } from './desert/DesertSurface'
 
 export default function HeroScene() {
+	const { resolvedTheme } = useTheme()
 	const [stars, setStars] = useState<Star[]>([])
 
 	useEffect(() => {
@@ -34,19 +37,24 @@ export default function HeroScene() {
 				<color attach='background' args={['#1a1a2e']} />
 				<ambientLight intensity={0.5} color='#ffffff' />
 				<directionalLight color='#ffffff' intensity={1.0} position={[0, 2000, 0]} castShadow />
-				<OrbitControls
-					target={[0, 100, 0]}
-					minDistance={50}
-					maxDistance={2000}
-					autoRotate={true}
-					autoRotateSpeed={0.5}
-				/>
+				<OrbitControls target={[0, 100, 0]} minDistance={50} maxDistance={2000} autoRotate={true} autoRotateSpeed={0.5} />
 				{/* 星のフィールドを Suspense でラップ */}
 				<Suspense fallback={null}>
-					<StarField stars={stars} sphereRadius={200} />
-					<SnowParticles count={500} area={2000} />
+					{resolvedTheme === 'dark' && (
+						<>
+							<StarField stars={stars} sphereRadius={200} />
+						</>
+					)}
+					{resolvedTheme === 'light' && (
+						<>
+							<DesertSurface />
+							<SnowParticles count={500} area={2000} />
+						</>
+					)}
 				</Suspense>
 			</Canvas>
 		</div>
 	)
 }
+
+

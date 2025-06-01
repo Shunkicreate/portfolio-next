@@ -18,6 +18,7 @@ const STAR_DISTANCE = 10 // 球面からの距離係数
 const SIZE_POWER = 1.5 // 差を強調しつつ極端すぎない
 const MAG_MIN = 0.0
 const MAG_MAX = 10.0 // 7.0や8.0に広げる
+const REM_SCALE = 0.2 // remInPxに掛ける倍率
 
 // 等級からサイズへの変換関数
 const magnitudeToSize = (mag: number): number => {
@@ -28,6 +29,14 @@ const magnitudeToSize = (mag: number): number => {
 }
 
 export const StarPoints: FC<StarPointsProps> = ({ stars, sphereRadius }) => {
+	const remInPx = useMemo<number>(() => {
+		// クライアントサイド実行が前提なので document が使える
+		const fontSize = getComputedStyle(document.documentElement).fontSize || '16px'
+		// "16px" → 16
+		const num = parseFloat(fontSize.replace('px', '') || '16')
+		return num
+	}, [])
+
 	const { positions, colors, sizes } = useMemo(() => {
 		const n = stars.length
 		const pos = new Float32Array(n * 3)
@@ -52,7 +61,10 @@ export const StarPoints: FC<StarPointsProps> = ({ stars, sphereRadius }) => {
 
 			// サイズ計算 - 等級(mag)に応じて大きさを変える
 			const normalizedSize = magnitudeToSize(s.mag)
-			sz[i] = normalizedSize
+
+			const size = normalizedSize * remInPx * REM_SCALE
+
+			sz[i] = size
 		})
 		return { positions: pos, colors: col, sizes: sz }
 	}, [stars, sphereRadius])
@@ -71,3 +83,5 @@ export const StarPoints: FC<StarPointsProps> = ({ stars, sphereRadius }) => {
 		</points>
 	)
 }
+
+
