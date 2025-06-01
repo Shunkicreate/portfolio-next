@@ -14,7 +14,7 @@ interface StarPointsProps {
 // 星の大きさの設定
 const STAR_MIN_SIZE = 0.1 // 最小サイズ（シェーダーでの最小値）
 const STAR_MAX_SIZE = 10 // 最大サイズ（シェーダーでの最大値）
-const STAR_DISTANCE = 50 // 球面からの距離係数
+const STAR_DISTANCE = 10 // 球面からの距離係数
 const SIZE_POWER = 1.5 // 差を強調しつつ極端すぎない
 const MAG_MIN = 0.0
 const MAG_MAX = 10.0 // 7.0や8.0に広げる
@@ -33,13 +33,6 @@ export const StarPoints: FC<StarPointsProps> = ({ stars, sphereRadius }) => {
 		const pos = new Float32Array(n * 3)
 		const col = new Float32Array(n * 3)
 		const sz = new Float32Array(n)
-
-		// デバッグ用：最初の10個の星の等級とサイズを表示
-		console.log('First 10 stars magnitude and size:')
-		stars.slice(0, 10).forEach((s, i) => {
-			const size = magnitudeToSize(s.mag)
-			console.log(`Star ${i}: mag=${s.mag.toFixed(2)}, size=${size.toFixed(3)}`)
-		})
 
 		stars.forEach((s, i) => {
 			const ra = (s.raDeg * Math.PI) / 180
@@ -61,19 +54,8 @@ export const StarPoints: FC<StarPointsProps> = ({ stars, sphereRadius }) => {
 			const normalizedSize = magnitudeToSize(s.mag)
 			sz[i] = normalizedSize
 		})
-		// デバッグ用：サイズの統計情報を表示
-		const minSize = Array.from(sz).reduce((min, val) => Math.min(min, val), Infinity)
-		const maxSize = Array.from(sz).reduce((max, val) => Math.max(max, val), -Infinity)
-		const avgSize = sz.reduce((a, b) => a + b, 0) / sz.length
-		console.log(`Size stats: min=${minSize.toFixed(3)}, max=${maxSize.toFixed(3)}, avg=${avgSize.toFixed(3)}`)
-
 		return { positions: pos, colors: col, sizes: sz }
 	}, [stars, sphereRadius])
-
-	// sizesのデータをデバッグ表示
-	console.log('sizes:', sizes)
-	console.log('sizes.length:', sizes.length)
-	console.log('sizes.slice(0, 10):', sizes.slice(0, 10))
 
 	const geometry = useMemo(() => {
 		const geo = new BufferGeometry()
