@@ -78,7 +78,7 @@ function DeseartTile({ tilePosition, timeUniform, gridSize, segments, normalMap 
             vec3 displacedBitangent = neighbor2Pos - wavePos_for_normal;
 
             objectNormal = normalize(cross(displacedBitangent, displacedTangent));
-          `
+          `,
 					)
 					.replace(
 						'#include <begin_vertex>',
@@ -87,7 +87,7 @@ function DeseartTile({ tilePosition, timeUniform, gridSize, segments, normalMap 
             vec3 wavePosition_for_vertex = moveWave(p_for_vertex, time, grid);
             transformed = vec3(p_for_vertex.x, wavePosition_for_vertex.y, p_for_vertex.z);
             vHeight = wavePosition_for_vertex.y;
-          `
+          `,
 					)
 
 				shader.fragmentShader = `
@@ -100,12 +100,12 @@ function DeseartTile({ tilePosition, timeUniform, gridSize, segments, normalMap 
             if (vHeight > 4.0) {
               diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.95, 0.92, 0.8), smoothstep(4.0, 7.0, vHeight));
             }
-          `
+          `,
 				)
 			}
 			materialRef.current.needsUpdate = true
 		}
-	}, [timeUniform, gridSize, normalMap])
+	}, [timeUniform, gridSize])
 
 	return (
 		<mesh position={tilePosition} geometry={geometry}>
@@ -155,4 +155,3 @@ export function DeseartSurface() {
 		</group>
 	)
 }
-

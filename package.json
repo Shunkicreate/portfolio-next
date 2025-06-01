@@ -40,6 +40,7 @@
 		}
 	},
 	"devDependencies": {
+		"@next/bundle-analyzer": "^15.3.3",
 		"@next/eslint-plugin-next": "^13.4.2",
 		"@types/node": "^v18.12.1",
 		"@types/react": "^19.1.6",
@@ -59,4 +60,3 @@
 		"typescript": "^5.0.4"
 	}
 }
-

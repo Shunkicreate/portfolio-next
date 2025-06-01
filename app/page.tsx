@@ -1,15 +1,8 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 import { parse } from 'node-html-parser'
-import HeroScene from '../components/HeroScene'
 import HomeContent from '../components/HomeContent'
 import { SiteType } from '../types/globals.type'
-
-async function getCarouselImages() {
-	const imgDirectory = path.join(process.cwd(), 'public/carousel')
-	const fileContents = await fs.readdir(imgDirectory, 'utf8')
-	return fileContents.map((file) => '/carousel/' + file)
-}
 
 async function getSiteData() {
 	const getURL = async (url: string) => {
@@ -64,12 +57,11 @@ async function getSiteData() {
 }
 
 export default async function Home() {
-	const [imgs, siteData] = await Promise.all([getCarouselImages(), getSiteData()])
+	const [siteData] = await Promise.all([getSiteData()])
 
 	return (
 		<main>
-			<HeroScene />
-			<HomeContent imgs={imgs} siteData={siteData} />
+			<HomeContent siteData={siteData} />
 		</main>
 	)
 }
