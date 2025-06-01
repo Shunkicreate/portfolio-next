@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import Image from 'next/image'
+import { useState } from 'react'
 import Masonry from 'react-masonry-css'
 import { Gallery as PhotoSwipeGallery, Item } from 'react-photoswipe-gallery'
 import 'photoswipe/dist/photoswipe.css'
@@ -64,4 +64,3 @@ export default function Gallery({ images }: GalleryProps) {
 		</div>
 	)
 }
-

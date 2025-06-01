@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import { useTheme } from 'next-themes'
 
 interface LoadingLogoProps {
 	onLoadingComplete: () => void
@@ -9,7 +8,6 @@ interface LoadingLogoProps {
 
 export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 	const [isVisible, setIsVisible] = useState(false)
-	const { theme } = useTheme()
 	const [isReducedMotion, setIsReducedMotion] = useState(false)
 	const wrapperRef = useRef<HTMLDivElement>(null)
 	const [pathsCount, setPathsCount] = useState(0)
@@ -41,7 +39,7 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 		const paths = svg.querySelectorAll('path')
 		setPathsCount(paths.length)
 		paths.forEach((path, idx) => {
-			const len = (path as SVGPathElement).getTotalLength()
+			const len = path.getTotalLength()
 			const delay = (paths.length - 1 - idx) * DELAY_STEP_S
 			path.setAttribute(
 				'style',
@@ -52,7 +50,7 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 					stroke-dashoffset:${len};
 					animation: draw ${DRAW_S}s ease forwards;
 					animation-delay:${delay}s;
-				`
+				`,
 			)
 		})
 	}, [])
@@ -66,7 +64,7 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 			setTimeout(onLoadingComplete, 500)
 		}, total)
 		return () => clearTimeout(timer)
-	}, [onLoadingComplete, isReducedMotion, pathsCount])
+	}, [onLoadingComplete, isReducedMotion, pathsCount, DRAW_MS, DELAY_STEP_MS, EXTRA_MS])
 
 	return (
 		<div
@@ -77,4 +75,3 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 		</div>
 	)
 }
-

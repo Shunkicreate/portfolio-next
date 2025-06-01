@@ -1,14 +1,4 @@
-import { useRouter } from 'next/router'
-import { MouseEvent, useState } from 'react'
-
 const Introduntion = () => {
-	const router = useRouter()
-	const [ClickState, setClickState] = useState(false)
-	const handleClick = async (e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>, href: string) => {
-		setClickState(true)
-		e.preventDefault()
-		await router.push(href)
-	}
 	return (
 		<div className='introduction'>
 			<div className='container'>
@@ -109,22 +99,7 @@ const Introduntion = () => {
 								Python and C language.
 							</div>
 							<div className='col-12'>
-								<a
-									href={'history'}
-									onClick={(e) => {
-										handleClick(e, 'history')
-											.then(() => {
-												setClickState(false)
-											})
-											.catch((e) => {
-												// eslint-disable-next-line no-console
-												console.log(e)
-											})
-									}}
-									target='_top'
-									className='nav-link active'
-									aria-current='page'
-								>
+								<a href={'history'} target='_top' className='nav-link active' aria-current='page'>
 									time-table
 								</a>
 							</div>

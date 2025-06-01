@@ -1,7 +1,7 @@
 'use client'
+import { useState } from 'react'
 import ProjectCard from '@/components/ProjectCard'
 import sitedata from '@/sitedata.json'
-import { useState } from 'react'
 
 export default function ProjectsPage() {
 	const [showAll, setShowAll] = useState(false)

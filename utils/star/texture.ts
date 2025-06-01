@@ -12,4 +12,3 @@ export function createCircleTexture(size = 32): CanvasTexture {
 	ctx.fill()
 	return new CanvasTexture(canvas)
 }
-

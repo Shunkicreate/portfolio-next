@@ -25,4 +25,3 @@ export default function Footer({ SNSData }: FooterProps) {
 		</footer>
 	)
 }
-

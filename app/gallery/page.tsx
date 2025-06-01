@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs'
 import path from 'path'
-import Gallery from '@/components/Gallery'
 import { Metadata } from 'next'
+import Gallery from '@/components/Gallery'
 
 export const metadata: Metadata = {
 	title: 'Gallery | Shunki Create',
@@ -35,4 +35,3 @@ export default async function GalleryPage() {
 		</main>
 	)
 }
-

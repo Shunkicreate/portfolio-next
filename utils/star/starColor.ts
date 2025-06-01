@@ -73,4 +73,3 @@ export function starColor(spType: string, bv: number): THREE.Color {
 	const temp = bvToTemp(bv)
 	return tempToColor(temp)
 }
-

@@ -1,9 +1,9 @@
 'use client'
 
-import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import Image from 'next/image'
 import { useState } from 'react'
+import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Swiperのスタイルを動的インポート
 import 'swiper/css'
@@ -67,4 +67,3 @@ export default function HomeCarousel({ imgs }: HomeCarouselProps) {
 		</div>
 	)
 }
-

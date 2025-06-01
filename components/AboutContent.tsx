@@ -48,4 +48,3 @@ export default function AboutContent({ content }: AboutContentProps) {
 		</article>
 	)
 }
-

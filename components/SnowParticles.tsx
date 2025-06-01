@@ -1,16 +1,14 @@
-// @ts-nocheck
-import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
+import { useMemo, useRef } from 'react'
 import * as THREE from 'three'
 
 function SnowParticles({ count = 2000, area = 2000, radius = 2 }) {
-    const SNOW_FALLING_START_HEIGHT = 1000
-    const SNOW_FALLING_SPEED = 60
-    const SPHERE_SEGMENTS = 8
-    const SNOW_OPACITY = 0.8
-    const SNOW_COLOR = '#ffffff'
-    const SNOW_EMISSIVE = '#404040' // 発光色を追加
-    const GROUND_LEVEL = 0
+	const SNOW_FALLING_START_HEIGHT = 1000
+	const SNOW_FALLING_SPEED = 60
+	const SPHERE_SEGMENTS = 8
+	const SNOW_OPACITY = 0.8
+	const SNOW_COLOR = '#ffffff'
+	const GROUND_LEVEL = 0
 
 	// 初期位置を保持する Float32Array
 	const positions = useMemo(() => {
@@ -23,7 +21,7 @@ function SnowParticles({ count = 2000, area = 2000, radius = 2 }) {
 		return arr
 	}, [count, area])
 
-	const meshRef = useRef()
+	const meshRef = useRef<THREE.InstancedMesh | null>(null)
 	const dummy = useMemo(() => new THREE.Object3D(), [])
 
 	useFrame((_, delta) => {
@@ -37,9 +35,11 @@ function SnowParticles({ count = 2000, area = 2000, radius = 2 }) {
 			// ダミーオブジェクトにマトリクスをセット
 			dummy.position.set(pos[i * 3], pos[i * 3 + 1], pos[i * 3 + 2])
 			dummy.updateMatrix()
-			meshRef.current.setMatrixAt(i, dummy.matrix)
+			meshRef.current?.setMatrixAt(i, dummy.matrix)
 		}
-		meshRef.current.instanceMatrix.needsUpdate = true
+		if (meshRef.current) {
+			meshRef.current.instanceMatrix.needsUpdate = true
+		}
 	})
 
 	return (
@@ -61,4 +61,3 @@ function SnowParticles({ count = 2000, area = 2000, radius = 2 }) {
 }
 
 export default SnowParticles
-

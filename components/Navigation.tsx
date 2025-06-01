@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
-import { useTheme } from 'next-themes'
+import { Menu, X, Sun, Moon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Sun, Moon } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import { useEffect, useState, useCallback } from 'react'
 
 const navItems = [
 	{ href: '/', label: 'Home' },
@@ -200,4 +200,3 @@ export default function Navigation() {
 		</nav>
 	)
 }
-

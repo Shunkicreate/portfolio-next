@@ -45,7 +45,6 @@ function main() {
         var out = __spreadArray([header], filtered, true).join('\n');
         var file = path.join(__dirname, "../public/stars_mag".concat(idx + 1, ".csv"));
         fs.writeFileSync(file, out, 'utf-8');
-        console.log("Wrote ".concat(filtered.length, " stars to ").concat(file));
     });
     var _loop_1 = function (i) {
         var lower = i === 0 ? -Infinity : MAG_LIMITS[i - 1];
@@ -58,7 +57,6 @@ function main() {
         var out = __spreadArray([header], filtered, true).join('\n');
         var file = path.join(__dirname, "../public/stars_mag".concat(i + 1, "_only.csv"));
         fs.writeFileSync(file, out, 'utf-8');
-        console.log("Wrote ".concat(filtered.length, " stars to ").concat(file));
     };
     // 範囲ファイル（N等星のみ）
     for (var i = 0; i < MAG_LIMITS.length; i++) {

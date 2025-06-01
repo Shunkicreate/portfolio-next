@@ -1,12 +1,12 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import Layout from '../components/Layout'
-import { type SNSType } from '../types/globals.type'
+// eslint-disable-next-line camelcase
 import { Noto_Serif_JP, Zen_Old_Mincho, Inter } from 'next/font/google'
+import Layout from '../components/Layout'
 import { ThemeProvider } from '../components/theme-provider'
+import { type SNSType } from '../types/globals.type'
 import Navigation from '@/components/Navigation'
-
-const notoSerifJP = Noto_Serif_JP({
+const notoSerif = Noto_Serif_JP({
 	subsets: ['latin'],
 	weight: ['400', '700'],
 	variable: '--font-noto-serif',
@@ -67,7 +67,7 @@ const SNSData: SNSType[] = [
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang='en' className={`${notoSerifJP.variable} ${zenOldMincho.variable} ${inter.variable}`} suppressHydrationWarning>
+		<html lang='en' className={`${notoSerif.variable} ${zenOldMincho.variable} ${inter.variable}`} suppressHydrationWarning>
 			<body>
 				<ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
 					<Navigation />
@@ -79,4 +79,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		</html>
 	)
 }
-

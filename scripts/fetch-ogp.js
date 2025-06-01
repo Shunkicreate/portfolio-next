@@ -21,11 +21,8 @@ async function main() {
 	const json = JSON.parse(await fs.readFile(filePath, 'utf8'))
 	for (const project of json.data) {
 		project.ogpImage = await fetchOGPImage(project.url)
-		console.log(`${project.name}: ${project.ogpImage}`)
 	}
 	await fs.writeFile(filePath, JSON.stringify(json, null, 2), 'utf8')
-	console.log('OGP画像の取得と保存が完了しました。')
 }
 
 main()
-

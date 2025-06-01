@@ -1,8 +1,7 @@
 'use client'
+import { gsap } from 'gsap'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
-import '@types/three'
-import { gsap } from 'gsap'
 
 interface ThreeCanvasProps {
 	theme?: string
@@ -10,15 +9,16 @@ interface ThreeCanvasProps {
 
 export default function ThreeCanvas({ theme = 'light' }: ThreeCanvasProps) {
 	const containerRef = useRef<HTMLDivElement>(null)
-	const sceneRef = useRef<THREE.Scene>(null)
-	const cameraRef = useRef<THREE.PerspectiveCamera>(null)
-	const rendererRef = useRef<THREE.WebGLRenderer>(null)
-	const particlesRef = useRef<THREE.InstancedMesh>(null)
-	const animationRef = useRef<number>(null)
+	const sceneRef = useRef<THREE.Scene | null>(null)
+	const cameraRef = useRef<THREE.PerspectiveCamera | null>(null)
+	const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
+	const particlesRef = useRef<THREE.InstancedMesh | null>(null)
+	const animationRef = useRef<number | null>(null)
 
-	// シーンの初期化
 	useEffect(() => {
-		if (!containerRef.current) return
+		// まず、render 先の要素をローカル変数にコピーしておく
+		const container = containerRef.current
+		if (!container) return
 
 		// シーンの設定
 		const scene = new THREE.Scene()
@@ -33,7 +33,7 @@ export default function ThreeCanvas({ theme = 'light' }: ThreeCanvasProps) {
 		const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
 		renderer.setSize(window.innerWidth, window.innerHeight)
 		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-		containerRef.current.appendChild(renderer.domElement)
+		container.appendChild(renderer.domElement) // ref ではなくローカル変数を使う
 		rendererRef.current = renderer
 
 		// パーティクルの設定
@@ -66,7 +66,7 @@ export default function ThreeCanvas({ theme = 'light' }: ThreeCanvasProps) {
 		scene.add(particles)
 		particlesRef.current = particles
 
-		// アニメーション
+		// アニメーションループ
 		const animate = () => {
 			if (!particlesRef.current) return
 
@@ -80,10 +80,9 @@ export default function ThreeCanvas({ theme = 'light' }: ThreeCanvasProps) {
 			renderer.render(scene, camera)
 			animationRef.current = requestAnimationFrame(animate)
 		}
-
 		animate()
 
-		// リサイズハンドラ
+		// リサイズハンドラを設定
 		const handleResize = () => {
 			if (!cameraRef.current || !rendererRef.current) return
 
@@ -91,36 +90,38 @@ export default function ThreeCanvas({ theme = 'light' }: ThreeCanvasProps) {
 			cameraRef.current.updateProjectionMatrix()
 			rendererRef.current.setSize(window.innerWidth, window.innerHeight)
 		}
-
 		window.addEventListener('resize', handleResize)
 
-		// GSAPアニメーション
+		// GSAP アニメーション
 		gsap.from(camera.position, {
 			z: 10,
 			duration: 2,
 			ease: 'power2.out',
 		})
-
 		gsap.from(particles.position, {
 			y: 10,
 			duration: 2,
 			ease: 'power2.out',
 		})
 
+		// ===== ここからクリーンアップ =====
 		return () => {
 			window.removeEventListener('resize', handleResize)
 			if (animationRef.current) {
 				cancelAnimationFrame(animationRef.current)
 			}
-			if (containerRef.current && rendererRef.current) {
-				containerRef.current.removeChild(rendererRef.current.domElement)
+
+			// 「containerRef.current」ではなく、ローカル変数 container を使う
+			if (container && rendererRef.current) {
+				container.removeChild(rendererRef.current.domElement)
 			}
+
 			geometry.dispose()
 			material.dispose()
 		}
 	}, [])
 
-	// テーマの変更に応じてパーティクルの色を更新
+	// テーマ変更時の色更新（クリーン）
 	useEffect(() => {
 		if (!particlesRef.current) return
 
@@ -130,4 +131,3 @@ export default function ThreeCanvas({ theme = 'light' }: ThreeCanvasProps) {
 
 	return <div ref={containerRef} className='absolute inset-0' />
 }
-

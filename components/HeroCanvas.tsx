@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
-import { gsap } from 'gsap'
+import { useTheme } from 'next-themes'
+import { useEffect, useRef, useState } from 'react'
 
 // Three.jsコンポーネントを動的インポート
 const ThreeCanvas = dynamic(() => import('@/components/ThreeCanvas'), {
@@ -62,4 +61,3 @@ export default function HeroCanvas({ className = '' }: HeroCanvasProps) {
 		</div>
 	)
 }
-

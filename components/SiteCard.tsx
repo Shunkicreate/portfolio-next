@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { type SiteType } from '../types/globals.type'
 import { useState } from 'react'
+import { type SiteType } from '../types/globals.type'
 
 interface SiteCardProps {
 	site: SiteType
@@ -20,12 +20,12 @@ export default function SiteCard({ site }: SiteCardProps) {
 						target='_blank'
 						rel='noopener noreferrer'
 						className='block w-full h-full'
-						aria-label={`Visit ${site.ogpTitle}`}
+						aria-label={`Visit ${site.ogpTitle || ''}`}
 					>
 						{isImageLoading && <div className='absolute inset-0 bg-gray-100 dark:bg-gray-800 animate-pulse' />}
 						<Image
 							src={site.ogpImage || '/images/placeholder.jpg'}
-							alt={`${site.name} thumbnail`}
+							alt={`${site.name || ''} thumbnail`}
 							fill
 							sizes='(max-width: 640px) 100vw, 240px'
 							className='object-cover'
@@ -54,11 +54,10 @@ export default function SiteCard({ site }: SiteCardProps) {
 								clipRule='evenodd'
 							/>
 						</svg>
-						<span className='truncate'>{site.url}</span>
+						<span className='truncate'>{site.url || ''}</span>
 					</div>
 				</div>
 			</div>
 		</article>
 	)
 }
-

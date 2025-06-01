@@ -23,4 +23,3 @@ export default function SNSIcon({ src, link, SNS }: SNSIconProps) {
 		</div>
 	)
 }
-

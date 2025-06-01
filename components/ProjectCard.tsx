@@ -27,4 +27,3 @@ export default function ProjectCard({ title, url, image }: ProjectCardProps) {
 		</Link>
 	)
 }
-
