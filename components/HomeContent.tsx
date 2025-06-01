@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { type SiteType } from '../types/globals.type'
-import Carousel from './HomeCarousel'
 import LoadingLogo from './LoadingLogo'
 import SiteCard from './SiteCard'
 import TopTitle from './TopTitle'
