@@ -9,6 +9,7 @@ import { Star, parseStars } from '../utils/star/parseStars'
 import SnowParticles from './SnowParticles'
 import { StarField } from './star/StarField'
 import { DesertSurface } from './desert/DesertSurface'
+import Lighting from './Lighting'
 
 export default function HeroScene() {
 	const { resolvedTheme } = useTheme()
@@ -34,10 +35,10 @@ export default function HeroScene() {
 				}}
 			>
 				{/* 背景色・ライト・コントロールは必要なら早めに宣言 */}
-				<color attach='background' args={['#1a1a2e']} />
-				<ambientLight intensity={0.5} color='#ffffff' />
-				<directionalLight color='#ffffff' intensity={1.0} position={[0, 2000, 0]} castShadow />
-				<OrbitControls target={[0, 100, 0]} minDistance={50} maxDistance={2000} autoRotate={true} autoRotateSpeed={0.5} />
+				{/* ライティングはここで統一して管理 */}
+				<Lighting theme={resolvedTheme || 'light'} />
+
+				<OrbitControls target={[100, 200, 100]} minDistance={50} maxDistance={2000} autoRotate={true} autoRotateSpeed={0.5} />
 				{/* 星のフィールドを Suspense でラップ */}
 				<Suspense fallback={null}>
 					{resolvedTheme === 'dark' && (
@@ -56,5 +57,3 @@ export default function HeroScene() {
 		</div>
 	)
 }
-
-
