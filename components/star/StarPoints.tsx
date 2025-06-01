@@ -67,7 +67,7 @@ export const StarPoints: FC<StarPointsProps> = ({ stars, sphereRadius }) => {
 			sz[i] = size
 		})
 		return { positions: pos, colors: col, sizes: sz }
-	}, [stars, sphereRadius])
+	}, [stars, sphereRadius, remInPx])
 
 	const geometry = useMemo(() => {
 		const geo = new BufferGeometry()
@@ -83,5 +83,3 @@ export const StarPoints: FC<StarPointsProps> = ({ stars, sphereRadius }) => {
 		</points>
 	)
 }
-
-

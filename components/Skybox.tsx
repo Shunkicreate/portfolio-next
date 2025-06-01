@@ -1,10 +1,10 @@
 // components/Skybox.tsx
 'use client'
 
-import { useMemo, useEffect } from 'react'
 import { useThree } from '@react-three/fiber'
-import { Sky } from 'three/examples/jsm/objects/Sky.js'
+import { useMemo, useEffect } from 'react'
 import { MathUtils, Vector3 } from 'three'
+import { Sky } from 'three/examples/jsm/objects/Sky.js'
 
 interface SkyboxProps {
 	/** 0 〜 24 の値で、24 時間制の「時刻」を指定します */
@@ -21,16 +21,16 @@ export default function Skybox({ timeOfDay }: SkyboxProps) {
 
 		if (timeOfDay >= 6 && timeOfDay <= 18) {
 			// ── 昼用パラメータ
-			s.material.uniforms['turbidity'].value = 1     // 大気の霞み具合
-			s.material.uniforms['rayleigh'].value = 0.1    // レイリー散乱の量
+			s.material.uniforms['turbidity'].value = 1 // 大気の霞み具合
+			s.material.uniforms['rayleigh'].value = 0.1 // レイリー散乱の量
 			s.material.uniforms['mieCoefficient'].value = 0.005 // ミー散乱強度
-			s.material.uniforms['mieDirectionalG'].value = 0.8  // ミー散乱の指向性
+			s.material.uniforms['mieDirectionalG'].value = 0.8 // ミー散乱の指向性
 		} else {
 			// ── 夜用パラメータ（空をかなり暗くする）
-			s.material.uniforms['turbidity'].value = 4    // 霞を強めて全体をくぐもらせる
-			s.material.uniforms['rayleigh'].value = 0.0    // レイリー散乱をオフ
+			s.material.uniforms['turbidity'].value = 4 // 霞を強めて全体をくぐもらせる
+			s.material.uniforms['rayleigh'].value = 0.0 // レイリー散乱をオフ
 			s.material.uniforms['mieCoefficient'].value = 0.0 // ミー散乱をオフ
-            s.material.uniforms['mieDirectionalG'].value = 0.0
+			s.material.uniforms['mieDirectionalG'].value = 0.0
 		}
 
 		return s
@@ -70,9 +70,8 @@ export default function Skybox({ timeOfDay }: SkyboxProps) {
 		const sunPosition = new Vector3().setFromSphericalCoords(1, phi, theta)
 
 		// 5. Sky のマテリアル uniform に sunPosition をコピー
-		sky.material.uniforms['sunPosition'].value.copy(sunPosition)
+		sky.material.uniforms['sunPosition'].value = sunPosition.clone()
 	}, [timeOfDay, sky])
 
 	return null
 }
-

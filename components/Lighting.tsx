@@ -1,8 +1,8 @@
 // components/Lighting.tsx
 'use client'
 
-import { useEffect } from 'react'
 import { useThree } from '@react-three/fiber'
+import { useEffect } from 'react'
 import { ACESFilmicToneMapping, Color } from 'three'
 import Skybox from './Skybox'
 
@@ -70,4 +70,3 @@ export default function Lighting({ theme }: LightingProps) {
 		</>
 	)
 }
-

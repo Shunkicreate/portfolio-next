@@ -6,10 +6,10 @@ import { useTheme } from 'next-themes'
 import { Suspense, useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { Star, parseStars } from '../utils/star/parseStars'
-import SnowParticles from './SnowParticles'
-import { StarField } from './star/StarField'
-import { DesertSurface } from './desert/DesertSurface'
 import Lighting from './Lighting'
+import SnowParticles from './SnowParticles'
+import { DesertSurface } from './desert/DesertSurface'
+import { StarField } from './star/StarField'
 
 export default function HeroScene() {
 	const { resolvedTheme } = useTheme()

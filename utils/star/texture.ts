@@ -5,7 +5,8 @@ import { CanvasTexture } from 'three'
 export function createCircleTexture(size = 32): CanvasTexture {
 	const canvas = document.createElement('canvas')
 	canvas.width = canvas.height = size
-	const ctx = canvas.getContext('2d')!
+	const ctx = canvas.getContext('2d')
+	if (!ctx) throw new Error('Failed to get 2D rendering context')
 	ctx.fillStyle = '#fff'
 	ctx.beginPath()
 	ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2)

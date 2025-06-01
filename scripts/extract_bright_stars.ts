@@ -38,6 +38,7 @@ function main() {
 		const out = [header, ...filtered].join('\n')
 		const file = path.join(__dirname, `../public/stars_mag${idx + 1}.csv`)
 		fs.writeFileSync(file, out, 'utf-8')
+		//
 		console.log(`Wrote ${filtered.length} stars to ${file}`)
 	})
 
@@ -53,6 +54,7 @@ function main() {
 		const out = [header, ...filtered].join('\n')
 		const file = path.join(__dirname, `../public/stars_mag${i + 1}_only.csv`)
 		fs.writeFileSync(file, out, 'utf-8')
+		// eslint-disable-next-line no-console
 		console.log(`Wrote ${filtered.length} stars to ${file}`)
 	}
 }
