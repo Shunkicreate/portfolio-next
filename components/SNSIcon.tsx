@@ -18,7 +18,13 @@ export default function SNSIcon({ src, link, SNS }: SNSIconProps) {
 				className='p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
 				aria-label={`Visit ${SNS} profile`}
 			>
-				<Image src={src} alt={`${SNS} icon`} width={32} height={32} className='w-8 h-8 md:w-10 md:h-10' />
+				<Image
+					src={src}
+					alt={`${SNS} icon`}
+					width={32}
+					height={32}
+					className='w-8 h-8 md:w-10 md:h-10 object-contain dark:invert text-black dark:text-white'
+				/>
 			</a>
 		</div>
 	)

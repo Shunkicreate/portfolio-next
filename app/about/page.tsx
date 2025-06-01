@@ -1,34 +1,13 @@
-import { promises as fs } from 'fs'
-import path from 'path'
-import AboutContent from '../../components/AboutContent'
-
-type rankType = {
-	rank: number
-	content: string
-}
-
-type Content = {
-	title: string
-	src: string
-	rank: rankType[]
-}
-
-async function getAboutData() {
-	const ContentDirectory = path.join(process.cwd(), 'aboutdata.json')
-	const aboutContentsStringData = await fs.readFile(ContentDirectory, 'utf8')
-	const aboutContents = JSON.parse(aboutContentsStringData) as { data: Content[] }
-	return aboutContents.data
-}
+import AboutContent from '@/components/AboutContent'
 
 export default async function About() {
-	const contents = await getAboutData()
-
 	return (
-		<main className='w-full md:w-3/4 lg:w-2/4 mx-auto'>
-			<h1 className='text-2xl font-bold mb-8'>About</h1>
-			{contents.map((content, i) => (
-				<AboutContent key={i} content={content} />
-			))}
-		</main>
+		<div className='flex flex-col flex-1 h-full bg-gray-100 dark:bg-gray-800'>
+			<h1 className='text-3xl font-bold text-gray-900 dark:text-white p-4'>About</h1>
+
+			<div className='flex-1 flex items-center justify-center px-4'>
+				<AboutContent />
+			</div>
+		</div>
 	)
 }

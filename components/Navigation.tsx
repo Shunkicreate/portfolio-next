@@ -72,7 +72,7 @@ export default function Navigation() {
 	}
 
 	return (
-		<nav className='fixed top-0 z-50 w-full bg-background/80 backdrop-blur-sm border-b border-border'>
+		<nav className='fixed top-0 z-50 w-full bg-background/80 backdrop-blur-sm border-b border-border h-16'>
 			<div className='container mx-auto px-4'>
 				<div className='flex h-16 items-center justify-between'>
 					<Link href='/' className='text-xl font-bold text-foreground hover:text-primary transition-colors' aria-label='Home'>

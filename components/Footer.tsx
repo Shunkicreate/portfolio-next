@@ -9,10 +9,10 @@ export default function Footer({ SNSData }: FooterProps) {
 	const currentYear = new Date().getFullYear()
 
 	return (
-		<footer className='mt-auto py-8 px-4 bg-gray-50 dark:bg-gray-900'>
+		<footer className='mt-auto py-4 px-4 bg-gray-50 dark:bg-gray-900 h-40'>
 			<div className='container mx-auto'>
 				<div className='border-t border-gray-200 dark:border-gray-700'>
-					<div className='grid grid-cols-3 md:grid-cols-6 gap-4 py-8'>
+					<div className='grid grid-cols-3 md:grid-cols-6 gap-4 py-6'>
 						{SNSData.map((item) => (
 							<SNSIcon key={item.SNS} src={item.src} link={item.link} SNS={item.SNS} />
 						))}
