@@ -54,7 +54,7 @@ export default function Lighting({ theme }: LightingProps) {
 					<directionalLight
 						color='#ffffff'
 						intensity={1.0}
-						position={[100, 200, 100]}
+						position={[0, 1000, 0]}
 						castShadow
 						shadow-mapSize-width={1024}
 						shadow-mapSize-height={1024}

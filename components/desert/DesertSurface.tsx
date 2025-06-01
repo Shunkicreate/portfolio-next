@@ -4,8 +4,8 @@ import { useMemo, useRef, useLayoutEffect } from 'react'
 import * as THREE from 'three'
 
 // 定数の設定
-const GRD_SIZE = 4000
-const SEG_NUM = 120
+const SEG_NUM = 600
+const GRD_SIZE = SEG_NUM * 10
 const GRD_RCS = 1
 const SAND_NORMAL_SRC = 'https://threejs.org/examples/textures/waternormals.jpg'
 
@@ -14,6 +14,10 @@ const moveWaveGLSL = `
   vec3 moveWave(vec3 p, float time_val, float grid_val){
       vec3 retVal = vec3(p.x, 0.0, p.z);
       float y = 0.0;
+
+	  y += sin(p.z * 0.0008 - 90.0) * 90.0;
+
+	  y += sin(p.z * 0.001) * 90.0;
       y += sin(p.x * 0.005) * 50.0;
       y += sin(p.x * 0.04 + p.z * 0.02) * 2.0;
       y += sin(p.x * 8.0) * 1.5;
@@ -160,3 +164,4 @@ export function DesertSurface() {
 		</group>
 	)
 }
+
