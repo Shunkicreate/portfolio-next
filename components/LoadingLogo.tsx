@@ -44,13 +44,13 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 			path.setAttribute(
 				'style',
 				`
-					fill:none;
-					stroke:currentColor;
-					stroke-dasharray:${len};
-					stroke-dashoffset:${len};
-					animation: draw ${DRAW_S}s ease forwards;
-					animation-delay:${delay}s;
-				`,
+               fill:none;
+               stroke:currentColor;
+               stroke-dasharray:${len};
+               stroke-dashoffset:${len};
+			   animation: draw ${DRAW_S}s ease forwards;
+               animation-delay:${delay}s;
+             `
 			)
 		})
 	}, [])
@@ -100,3 +100,4 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 		</div>
 	)
 }
+

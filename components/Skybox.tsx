@@ -21,15 +21,23 @@ export default function Skybox({ timeOfDay }: SkyboxProps) {
 
 		if (timeOfDay >= 6 && timeOfDay <= 18) {
 			// ── 昼用パラメータ
-			s.material.uniforms['turbidity'].value = 1 // 大気の霞み具合
-			s.material.uniforms['rayleigh'].value = 0.1 // レイリー散乱の量
-			s.material.uniforms['mieCoefficient'].value = 0.005 // ミー散乱強度
-			s.material.uniforms['mieDirectionalG'].value = 0.8 // ミー散乱の指向性
+			// turbidity: 大気の濁り度。1=澄んだ空、20=霞んだ空
+			s.material.uniforms['turbidity'].value = 1
+			// rayleigh: 空気分子による光の散乱。0.1=青空が強調、2=より白っぽい空
+			s.material.uniforms['rayleigh'].value = 0.1
+			// mieCoefficient: 大気中の粒子による散乱強度。0.005=クリアな空、10=霞んだ空
+			s.material.uniforms['mieCoefficient'].value = 0.005
+			// mieDirectionalG: 散乱の方向性。0=全方向均一、1=前方散乱が強い。0.8=太陽周辺が明るい
+			s.material.uniforms['mieDirectionalG'].value = 0.8
 		} else {
 			// ── 夜用パラメータ（空をかなり暗くする）
-			s.material.uniforms['turbidity'].value = 4 // 霞を強めて全体をくぐもらせる
-			s.material.uniforms['rayleigh'].value = 0.0 // レイリー散乱をオフ
-			s.material.uniforms['mieCoefficient'].value = 0.0 // ミー散乱をオフ
+			// turbidity: 20に設定し、夜空をより暗く霞ませる
+			s.material.uniforms['turbidity'].value = 20
+			// rayleigh: 0に設定し、空気分子による散乱を抑えて暗い空
+			s.material.uniforms['rayleigh'].value = 0
+			// mieCoefficient: 10に設定し、強い散乱で光を拡散させ暗さを演出
+			s.material.uniforms['mieCoefficient'].value = 10
+			// mieDirectionalG: 0に設定し、散乱を均一にして夜空の自然な暗さを表現
 			s.material.uniforms['mieDirectionalG'].value = 0.0
 		}
 
@@ -75,3 +83,4 @@ export default function Skybox({ timeOfDay }: SkyboxProps) {
 
 	return null
 }
+

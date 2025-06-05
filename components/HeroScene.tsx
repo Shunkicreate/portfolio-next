@@ -16,7 +16,7 @@ export default function HeroScene() {
 	const [stars, setStars] = useState<Star[]>([])
 
 	useEffect(() => {
-		fetch('/stars_mag6.csv')
+		fetch('/stars_mag9.csv')
 			.then((r) => r.text())
 			.then((t) => setStars(parseStars(t)))
 			// eslint-disable-next-line no-console
@@ -24,9 +24,11 @@ export default function HeroScene() {
 	}, [])
 
 	return (
-		<div className='w-full h-screen relative'>
+		<div className='relative w-full h-full'>
 			<Canvas
-				camera={{ position: [0, 25, 350], fov: 55, near: 1, far: 15000 }}
+				className='w-full h-full'
+				style={{ height: 'calc(100dvh - 4rem)', width: '100%' }}
+				camera={{ position: [0, 25, 0], fov: 55, near: 1, far: 15000 }}
 				onCreated={({ gl }) => {
 					// Three.js v0.155 以降なら outputColorSpace で色空間を設定
 					if (gl.outputColorSpace !== undefined) {
@@ -38,7 +40,7 @@ export default function HeroScene() {
 				{/* ライティングはここで統一して管理 */}
 				<Lighting theme={resolvedTheme || 'light'} />
 
-				<OrbitControls target={[100, 90, 100]} minDistance={50} maxDistance={2000} autoRotate={true} autoRotateSpeed={0.5} />
+				<OrbitControls target={[0, 25, 0]} minDistance={50} maxDistance={2000} autoRotate={true} autoRotateSpeed={0.5} />
 				{/* 星のフィールドを Suspense でラップ */}
 				<Suspense fallback={null}>
 					{resolvedTheme === 'dark' && (
@@ -57,3 +59,4 @@ export default function HeroScene() {
 		</div>
 	)
 }
+

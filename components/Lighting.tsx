@@ -20,7 +20,7 @@ export default function Lighting({ theme }: LightingProps) {
 		if (theme === 'light') {
 			gl.toneMappingExposure = 0.8 // 昼は露光強め
 		} else {
-			gl.toneMappingExposure = 0.8 // 夜は露光弱め
+			gl.toneMappingExposure = 0.3 // 夜は露光を弱めて、より暗く
 		}
 	}, [gl, theme])
 
@@ -30,7 +30,7 @@ export default function Lighting({ theme }: LightingProps) {
 		if (theme === 'light') {
 			scene.background = new Color(0x87ceeb) // 昼っぽい薄い水色 (参考)
 		} else {
-			scene.background = new Color(0x1a1a2e) // 夜っぽい紺色 (参考)
+			scene.background = new Color(0x040033) // 夜っぽい紺色 (参考)
 		}
 	}, [theme, scene])
 
@@ -70,3 +70,4 @@ export default function Lighting({ theme }: LightingProps) {
 		</>
 	)
 }
+

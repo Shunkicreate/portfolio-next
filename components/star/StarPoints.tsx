@@ -12,9 +12,9 @@ interface StarPointsProps {
 }
 
 // 星の大きさの設定
-const STAR_MIN_SIZE = 0.1 // 最小サイズ（シェーダーでの最小値）
-const STAR_MAX_SIZE = 10 // 最大サイズ（シェーダーでの最大値）
-const STAR_DISTANCE = 10 // 球面からの距離係数
+const STAR_MIN_SIZE = 0.4 // 最小サイズ（シェーダーでの最小値）
+const STAR_MAX_SIZE = 13 // 最大サイズ（シェーダーでの最大値）
+const STAR_DISTANCE = 0.3 // 球面からの距離係数
 const SIZE_POWER = 1.5 // 差を強調しつつ極端すぎない
 const MAG_MIN = 0.0
 const MAG_MAX = 10.0 // 7.0や8.0に広げる

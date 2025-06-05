@@ -12,9 +12,7 @@ interface StarFieldProps {
 export const StarField: FC<StarFieldProps> = ({ stars, sphereRadius }) => {
 	return (
 		<>
-			<ambientLight intensity={0.2} />
 			<StarPoints stars={stars} sphereRadius={sphereRadius} />
-			<OrbitControls enableZoom />
 		</>
 	)
 }

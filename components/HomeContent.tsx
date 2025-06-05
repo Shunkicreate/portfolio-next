@@ -12,9 +12,10 @@ const DynamicHeroScene = dynamic(() => import('../components/HeroScene'), {
 export default function HomeContent() {
 	const [isLoading, setIsLoading] = useState(true)
 	return (
-		<>
+		<div className='flex-1 flex flex-col h-full min-h-[calc(100dvh-10rem)]'>
 			{isLoading && <LoadingLogo onLoadingComplete={() => setIsLoading(false)} />}
 			<DynamicHeroScene />
-		</>
+		</div>
 	)
 }
+
