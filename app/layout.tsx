@@ -1,41 +1,29 @@
 import './globals.css'
 import { Metadata } from 'next'
-// eslint-disable-next-line camelcase
-import { Inter, Noto_Serif_JP, Zen_Old_Mincho } from 'next/font/google'
 import DynamicRootLayoutClient from './DynamicRootLayoutClient'
 
-// フォントの設定を最適化
-const inter = Inter({
-	subsets: ['latin'],
-	display: 'swap',
-	preload: false,
-	variable: '--font-inter',
-})
-
-const notoSerifJp = Noto_Serif_JP({
-	subsets: ['latin'],
-	weight: ['400'],
-	display: 'swap',
-	preload: false,
-	variable: '--font-noto-serif',
-})
-
-const zenOldMincho = Zen_Old_Mincho({
-	subsets: ['latin'],
-	weight: ['400'],
-	display: 'swap',
-	preload: false,
-	variable: '--font-zen-old-mincho',
-})
+// システムフォントを基本フォントとして設定
+const systemFont = `-apple-system, BlinkMacSystemFont, "Segoe UI", 
+  Roboto, "Helvetica Neue", Arial, "Noto Sans", 
+  sans-serif, "Apple Color Emoji", "Segoe UI Emoji", 
+  "Segoe UI Symbol", "Noto Color Emoji"`
 
 export const metadata: Metadata = {
-	title: 'Shunki Create',
+	title: {
+		default: 'Shunki Create',
+		template: '%s | Shunki Create',
+	},
 	description: 'Portfolio site of Shunki Tada',
+	openGraph: {
+		title: 'Shunki Create',
+		description: 'Portfolio site of Shunki Tada',
+		type: 'website',
+	},
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang='ja' suppressHydrationWarning className={`${inter.variable} ${notoSerifJp.variable} ${zenOldMincho.variable}`}>
+		<html lang='ja' suppressHydrationWarning>
 			<head>
 				<style
 					dangerouslySetInnerHTML={{
@@ -43,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					:root {
 						--background: #FAF8F6;
 						--foreground: #1A1A1A;
+						--font-sans: ${systemFont};
 					}
 					@media (prefers-color-scheme: dark) {
 						:root {
@@ -54,6 +43,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						margin: 0;
 						background-color: var(--background);
 						color: var(--foreground);
+						font-family: var(--font-sans);
+						-webkit-font-smoothing: antialiased;
+						-moz-osx-font-smoothing: grayscale;
 					}
 				`,
 					}}
@@ -65,3 +57,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		</html>
 	)
 }
+

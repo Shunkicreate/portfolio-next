@@ -23,35 +23,38 @@ const nextConfig = {
 		],
 	},
 	experimental: {
-		optimizeCss: {
-			critters: {
-				ssrMode: 'strict',
-				preload: 'media',
-				pruneSource: true,
-				reduceInlineStyles: true,
-			},
-		},
+		optimizeCss: true,
+		optimizePackageImports: ['@headlessui/react', 'gsap', 'swiper', 'photoswipe'],
+		scrollRestoration: true,
 	},
 	compiler: {
 		removeConsole: process.env.NODE_ENV === 'production',
 	},
 	webpack: (config, { dev, isServer }) => {
 		if (!dev && !isServer) {
+			// CSS optimization
 			config.optimization.splitChunks.cacheGroups.styles = {
 				name: 'styles',
 				test: /\.(css|scss)$/,
 				chunks: 'all',
 				enforce: true,
+				priority: 10,
 			}
-		}
 
-		config.externals = config.externals || {}
-		if (!isServer) {
+			// Vendor chunk optimization
 			config.optimization.splitChunks.cacheGroups.vendor = {
 				name: 'vendor',
-				test: /[\\/]node_modules[\\/](three|@react-three)[\\/]/,
+				test: /[\\/]node_modules[\\/]/,
 				chunks: 'all',
 				priority: 20,
+			}
+
+			// Three.js specific optimization
+			config.optimization.splitChunks.cacheGroups.three = {
+				name: 'three',
+				test: /[\\/]node_modules[\\/](three|@react-three)[\\/]/,
+				chunks: 'all',
+				priority: 30,
 			}
 		}
 
