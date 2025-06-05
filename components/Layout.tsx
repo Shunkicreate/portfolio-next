@@ -1,6 +1,6 @@
 'use client'
-import { type ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
+import { type ReactNode } from 'react'
 import { type SNSType } from '../types/globals.type'
 import Footer from './Footer'
 import Navigation from './Navigation'

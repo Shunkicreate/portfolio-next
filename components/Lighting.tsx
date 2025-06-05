@@ -70,4 +70,3 @@ export default function Lighting({ theme }: LightingProps) {
 		</>
 	)
 }
-

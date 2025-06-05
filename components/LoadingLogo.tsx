@@ -50,7 +50,7 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
                stroke-dashoffset:${len};
 			   animation: draw ${DRAW_S}s ease forwards;
                animation-delay:${delay}s;
-             `
+             `,
 			)
 		})
 	}, [])
@@ -100,4 +100,3 @@ export default function LoadingLogo({ onLoadingComplete }: LoadingLogoProps) {
 		</div>
 	)
 }
-

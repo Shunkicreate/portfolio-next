@@ -2,10 +2,10 @@ import './globals.css'
 import type { Metadata } from 'next'
 // eslint-disable-next-line camelcase
 import { Noto_Serif_JP, Zen_Old_Mincho, Inter } from 'next/font/google'
+import SNSDataJson from '../SNSdata.json'
 import Layout from '../components/Layout'
 import { ThemeProvider } from '../components/theme-provider'
 import { type SNSType } from '../types/globals.type'
-import SNSDataJson from '../SNSdata.json'
 
 const notoSerif = Noto_Serif_JP({
 	subsets: ['latin'],

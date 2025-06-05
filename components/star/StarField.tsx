@@ -1,5 +1,4 @@
 'use client'
-import { OrbitControls } from '@react-three/drei'
 import React, { FC } from 'react'
 import { Star } from '../../utils/star/parseStars'
 import { StarPoints } from './StarPoints'
