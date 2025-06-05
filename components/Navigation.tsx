@@ -11,7 +11,6 @@ const navItems = [
 	{ href: '/about', label: 'About' },
 	{ href: '/projects', label: 'Projects' },
 	{ href: '/gallery', label: 'Gallery' },
-	{ href: '/contact', label: 'Contact' },
 	{ href: 'https://note.com/shunki_create', label: 'Note', isExternal: true },
 	{ href: 'https://qiita.com/Shunkicreate', label: 'Qiita', isExternal: true },
 	{ href: 'https://github.com/Shunkicreate', label: 'GitHub', isExternal: true },

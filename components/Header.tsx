@@ -9,7 +9,6 @@ const Pages = [
 	{ url: '/', display: 'Home' },
 	{ url: '/history', display: 'History' },
 	{ url: '/about', display: 'About me' },
-	{ url: '/contact', display: 'Contact' },
 ] as const
 
 export default function Header() {

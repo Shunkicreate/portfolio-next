@@ -88,4 +88,3 @@ export default function Skybox({ timeOfDay }: SkyboxProps) {
 
 	return null
 }
-

@@ -29,7 +29,7 @@ export default async function GalleryPage() {
 	return (
 		<main className='min-h-screen py-8'>
 			<div className='container mx-auto px-4'>
-				<h1 className='text-4xl font-serif mb-8'>Gallery</h1>
+				<h1 className='text-4xl mb-8'>Gallery</h1>
 				<Gallery images={images} />
 			</div>
 		</main>

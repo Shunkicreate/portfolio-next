@@ -3,7 +3,7 @@
 
 import { useThree } from '@react-three/fiber'
 import { useEffect } from 'react'
-import { ACESFilmicToneMapping, Color } from 'three'
+import { ACESFilmicToneMapping } from 'three'
 import Skybox from './Skybox'
 
 interface LightingProps {
@@ -11,7 +11,7 @@ interface LightingProps {
 }
 
 export default function Lighting({ theme }: LightingProps) {
-	const { gl, scene } = useThree()
+	const { gl } = useThree()
 
 	useEffect(() => {
 		// ACESFilmicToneMapping を使う例

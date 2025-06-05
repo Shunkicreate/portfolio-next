@@ -77,4 +77,3 @@ export default function Modal({ isOpen, onClose, title, description }: ModalProp
 		</Dialog>
 	)
 }
-
