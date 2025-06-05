@@ -7,7 +7,7 @@ import Modal from './Modal'
 
 const DynamicHeroScene = dynamic(() => import('../components/HeroScene'), {
 	ssr: false, // サーバー側でレンダリングせず、クライアントマウント後に読み込む
-	loading: () => <div className='w-full h-screen bg-[#1a1a2e]' />, // 3D シーン読み込み中のプレースホルダー
+	loading: () => <div className='w-full h-full' />, // 3D シーン読み込み中のプレースホルダー
 })
 
 export default function HomeContent() {
