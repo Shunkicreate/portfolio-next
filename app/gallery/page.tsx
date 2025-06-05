@@ -14,7 +14,7 @@ async function getGalleryImages() {
 	const files = await fs.readdir(imgDirectory)
 
 	// Filter for image files and get their metadata
-	const imageFiles = files.filter((file) => /\.(jpg|jpeg|png|avif|webp)$/i.test(file))
+	const imageFiles = files.filter((file) => /\.(webp)$/i.test(file))
 
 	return imageFiles.map((file) => ({
 		src: `/gallery/${file}`,
