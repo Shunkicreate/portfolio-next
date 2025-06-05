@@ -2,10 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 // eslint-disable-next-line camelcase
 import { Noto_Serif_JP, Zen_Old_Mincho, Inter } from 'next/font/google'
-import SNSDataJson from '../SNSdata.json'
-import Layout from '../components/Layout'
-import { ThemeProvider } from '../components/theme-provider'
-import { type SNSType } from '../types/globals.type'
+import DynamicRootLayoutClient from './DynamicRootLayoutClient'
 
 const notoSerif = Noto_Serif_JP({
 	subsets: ['latin'],
@@ -33,17 +30,11 @@ export const metadata: Metadata = {
 	description: 'Portfolio site of Shunki Tada',
 }
 
-const SNSData: SNSType[] = SNSDataJson.data
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='en' className={`${notoSerif.variable} ${zenOldMincho.variable} ${inter.variable}`} suppressHydrationWarning>
 			<body>
-				<ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-					<main>
-						<Layout SNSData={SNSData}>{children}</Layout>
-					</main>
-				</ThemeProvider>
+				<DynamicRootLayoutClient>{children}</DynamicRootLayoutClient>
 			</body>
 		</html>
 	)
