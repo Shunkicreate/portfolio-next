@@ -26,7 +26,7 @@ export default function AboutContent() {
 					</li>
 					<li>
 						<span className='font-semibold'>職歴:</span>
-						<span className='ml-2'>株式会社 DeNA — Voice Pococha 開発担当</span>
+						<span className='ml-2'>株式会社 DeNA — Voice Pococha</span>
 					</li>
 					<li>
 						<span className='font-semibold'>ブログ:</span>
