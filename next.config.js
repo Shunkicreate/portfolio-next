@@ -2,6 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',
 })
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
 	eslint: {
@@ -21,22 +22,37 @@ const nextConfig = {
 			'topolly-prod.global.ssl.fastly.net',
 		],
 	},
-	webpack: (config) => {
-		// バンドルの最適化
-		config.optimization.splitChunks.cacheGroups = {
-			...config.optimization.splitChunks.cacheGroups,
-			three: {
-				test: /[\\/]node_modules[\\/](three|@react-three)[\\/]/,
-				name: 'three-vendor',
-				chunks: 'all',
-				priority: 10,
+	experimental: {
+		optimizeCss: {
+			critters: {
+				ssrMode: 'strict',
+				preload: 'media',
+				pruneSource: true,
+				reduceInlineStyles: true,
 			},
-			react: {
-				test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
-				name: 'react-vendor',
+		},
+	},
+	compiler: {
+		removeConsole: process.env.NODE_ENV === 'production',
+	},
+	webpack: (config, { dev, isServer }) => {
+		if (!dev && !isServer) {
+			config.optimization.splitChunks.cacheGroups.styles = {
+				name: 'styles',
+				test: /\.(css|scss)$/,
+				chunks: 'all',
+				enforce: true,
+			}
+		}
+
+		config.externals = config.externals || {}
+		if (!isServer) {
+			config.optimization.splitChunks.cacheGroups.vendor = {
+				name: 'vendor',
+				test: /[\\/]node_modules[\\/](three|@react-three)[\\/]/,
 				chunks: 'all',
 				priority: 20,
-			},
+			}
 		}
 
 		return config

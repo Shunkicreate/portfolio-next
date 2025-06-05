@@ -2,6 +2,7 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import { Metadata } from 'next'
 import Gallery from '@/components/Gallery'
+import 'photoswipe/dist/photoswipe.css'
 
 export const metadata: Metadata = {
 	title: 'Gallery | Shunki Create',

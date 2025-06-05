@@ -1,10 +1,19 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useState } from 'react'
 import Masonry from 'react-masonry-css'
-import { Gallery as PhotoSwipeGallery, Item } from 'react-photoswipe-gallery'
-import 'photoswipe/dist/photoswipe.css'
+
+// PhotoSwipeを動的インポート
+const PhotoSwipeGallery = dynamic(() => import('react-photoswipe-gallery').then((mod) => mod.Gallery), {
+	loading: () => <div>Loading gallery...</div>,
+	ssr: false,
+})
+
+const PhotoSwipeItem = dynamic(() => import('react-photoswipe-gallery').then((mod) => mod.Item), {
+	ssr: false,
+})
 
 interface GalleryProps {
 	images: {
@@ -31,7 +40,13 @@ export default function Gallery({ images }: GalleryProps) {
 				<Masonry breakpointCols={breakpointColumns} className='flex w-auto -ml-4' columnClassName='pl-4 bg-clip-padding'>
 					{images.map((image, index) => (
 						<div key={index} className='mb-4 relative group'>
-							<Item original={image.src} thumbnail={image.src} width={image.width} height={image.height} alt={image.alt}>
+							<PhotoSwipeItem
+								original={image.src}
+								thumbnail={image.src}
+								width={image.width}
+								height={image.height}
+								alt={image.alt}
+							>
 								{({ ref, open }) => (
 									<div ref={ref} onClick={open} className='cursor-pointer'>
 										<div className='relative aspect-[4/3] overflow-hidden rounded-lg'>
@@ -51,7 +66,7 @@ export default function Gallery({ images }: GalleryProps) {
 										</div>
 									</div>
 								)}
-							</Item>
+							</PhotoSwipeItem>
 						</div>
 					))}
 				</Masonry>

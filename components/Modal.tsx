@@ -2,7 +2,6 @@
 
 import { Dialog, DialogPanel, DialogTitle, Description } from '@headlessui/react'
 import Link from 'next/link'
-import 'animate.css'
 import { useEffect, useState } from 'react'
 
 interface ModalProps {
@@ -17,24 +16,22 @@ export default function Modal({ isOpen, onClose, title, description }: ModalProp
 
 	const handleClose = () => {
 		setIsClosing(true)
-		// アニメーション完了を待ってから実際にモーダルを閉じる
 		setTimeout(() => {
-			setIsClosing(false)
 			onClose()
-		}, 500) // アニメーションの時間に合わせる
+			setIsClosing(false)
+		}, 300) // アニメーション時間に合わせる
 	}
 
-	// モーダルが開いたときにアニメーションクラスをリセット
 	useEffect(() => {
-		if (isOpen) {
+		if (!isOpen) {
 			setIsClosing(false)
 		}
 	}, [isOpen])
 
 	return (
 		<Dialog open={isOpen} onClose={handleClose} className='relative z-50'>
-			<div className='fixed inset-0 bg-black/[2%] backdrop-blur-[1px] dark:bg-black/[2%]' aria-hidden='true' />
-			<div className='fixed inset-0 flex w-screen items-center justify-center p-4'>
+			<div className='fixed inset-0 bg-black/30 backdrop-blur-sm' aria-hidden='true' />
+			<div className='fixed inset-0 flex items-center justify-center p-4'>
 				<DialogPanel
 					className={`mx-auto max-w-xl rounded-2xl 
 					bg-gradient-to-br from-white/30 to-white/10 dark:from-black/30 dark:to-black/10
@@ -47,7 +44,8 @@ export default function Modal({ isOpen, onClose, title, description }: ModalProp
 					before:absolute before:inset-0 before:rounded-2xl before:p-[1px]
 					before:bg-gradient-to-br before:from-white/10 before:to-white/5 dark:before:from-white/5 dark:before:to-transparent
 					before:-z-10
-					animate__animated ${isClosing ? 'animate__zoomOutRight animate__faster' : 'animate__fadeIn animate__slow'}
+					transition-all duration-300
+					${isClosing ? 'scale-95 opacity-0 translate-x-full' : 'scale-100 opacity-100 translate-x-0'}
 				`}
 				>
 					<DialogTitle className='text-3xl font-bold tracking-tight text-gray-900/80 dark:text-white/80'>{title}</DialogTitle>

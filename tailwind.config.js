@@ -12,9 +12,9 @@ module.exports = {
 		},
 		extend: {
 			fontFamily: {
-				serif: ['"Noto Serif JP"', 'serif'],
-				oldmin: ['"Zen Old Mincho"', 'serif'],
-				sans: ['Inter', 'sans-serif'],
+				serif: ['var(--font-noto-serif)', 'serif'],
+				oldmin: ['var(--font-zen-old-mincho)', 'serif'],
+				sans: ['var(--font-inter)', 'sans-serif'],
 			},
 			colors: {
 				base: '#FAF8F6',
@@ -89,6 +89,8 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [require('tailwindcss-animate')],
+	plugins: [],
+	safelist: [],
+	blocklist: ['container'],
 }
 

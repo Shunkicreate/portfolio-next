@@ -1,28 +1,31 @@
 import './globals.css'
-import type { Metadata } from 'next'
+import { Metadata } from 'next'
 // eslint-disable-next-line camelcase
-import { Noto_Serif_JP, Zen_Old_Mincho, Inter } from 'next/font/google'
+import { Inter, Noto_Serif_JP, Zen_Old_Mincho } from 'next/font/google'
 import DynamicRootLayoutClient from './DynamicRootLayoutClient'
 
-const notoSerif = Noto_Serif_JP({
+// フォントの設定を最適化
+const inter = Inter({
 	subsets: ['latin'],
-	weight: ['400', '700'],
-	variable: '--font-noto-serif',
 	display: 'swap',
+	preload: false,
+	variable: '--font-inter',
+})
+
+const notoSerifJp = Noto_Serif_JP({
+	subsets: ['latin'],
+	weight: ['400'],
+	display: 'swap',
+	preload: false,
+	variable: '--font-noto-serif',
 })
 
 const zenOldMincho = Zen_Old_Mincho({
-	weight: ['400', '700'],
 	subsets: ['latin'],
+	weight: ['400'],
+	display: 'swap',
+	preload: false,
 	variable: '--font-zen-old-mincho',
-	display: 'swap',
-})
-
-const inter = Inter({
-	subsets: ['latin'],
-	weight: ['400', '500', '600', '700'],
-	variable: '--font-inter',
-	display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -32,10 +35,29 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang='en' className={`${notoSerif.variable} ${zenOldMincho.variable} ${inter.variable}`} suppressHydrationWarning>
+		<html lang='ja' suppressHydrationWarning className={`${inter.variable} ${notoSerifJp.variable} ${zenOldMincho.variable}`}>
 			<head>
-				<link rel='preload' href='/_next/static/chunks/three-vendor.js' as='script' />
-				<link rel='preload' href='/_next/static/chunks/react-vendor.js' as='script' />
+				<style
+					dangerouslySetInnerHTML={{
+						__html: `
+					:root {
+						--background: #FAF8F6;
+						--foreground: #1A1A1A;
+					}
+					@media (prefers-color-scheme: dark) {
+						:root {
+							--background: #1A1A1A;
+							--foreground: #FAF8F6;
+						}
+					}
+					body {
+						margin: 0;
+						background-color: var(--background);
+						color: var(--foreground);
+					}
+				`,
+					}}
+				/>
 			</head>
 			<body>
 				<DynamicRootLayoutClient>{children}</DynamicRootLayoutClient>

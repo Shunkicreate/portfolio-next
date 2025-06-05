@@ -4,19 +4,35 @@ interface LoadingLayoutProps {
 	onLoadingComplete: () => void
 }
 
+// クリティカルCSSをインライン化
+const criticalStyles = {
+	container: {
+		position: 'relative' as const,
+		minHeight: '100vh',
+		backgroundColor: 'var(--background)',
+		margin: 0,
+		padding: 0,
+	},
+	heading: {
+		position: 'absolute' as const,
+		inset: 0,
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		fontSize: '3rem',
+		fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+		fontWeight: 'bold',
+		color: 'var(--foreground)',
+		opacity: 0.001,
+		margin: 0,
+		padding: 0,
+	},
+}
+
 export default function LoadingLayout({ onLoadingComplete }: LoadingLayoutProps) {
 	return (
-		<div className='relative min-h-screen bg-background'>
-			{/*
-        LCP 候補として検出させたい "ほぼ透明" な見出しを先に置く
-        ・opacity: 0.01 でレイアウト領域を確保しつつ、目立たないようにする
-        ・ビューポートの中心に大きく置いておくと確実に検出されやすい
-      */}
-			<h1 className='absolute inset-0 flex items-center justify-center text-5xl font-bold text-foreground' style={{ opacity: 0.001 }}>
-				Shunki Create
-			</h1>
-
-			{/* ここが既存のロゴアニメーション */}
+		<div style={criticalStyles.container}>
+			<h1 style={criticalStyles.heading}>Shunki Create</h1>
 			<LoadingLogo onLoadingComplete={onLoadingComplete} />
 		</div>
 	)
