@@ -18,21 +18,11 @@ export default function Lighting({ theme }: LightingProps) {
 		gl.toneMapping = ACESFilmicToneMapping
 
 		if (theme === 'light') {
-			gl.toneMappingExposure = 0.8 // 昼は露光強め
+			gl.toneMappingExposure = 1.0 // 昼は露光強め
 		} else {
 			gl.toneMappingExposure = 0.3 // 夜は露光を弱めて、より暗く
 		}
 	}, [gl, theme])
-
-	// Canvas 背景色は Skybox で表現するため、ここで scene.background をクリア
-	useEffect(() => {
-		// 空のColorを好きに設定しておく（Skybox があれば実質見えないが、一応設定）
-		if (theme === 'light') {
-			scene.background = new Color(0x87ceeb) // 昼っぽい薄い水色 (参考)
-		} else {
-			scene.background = new Color(0x040033) // 夜っぽい紺色 (参考)
-		}
-	}, [theme, scene])
 
 	// テーマに応じて「時刻 (0～24)」を割り当てる
 	const timeOfDay = theme === 'light' ? 15 : 0

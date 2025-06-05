@@ -28,7 +28,7 @@ export default function HeroScene() {
 			<Canvas
 				className='w-full h-full'
 				style={{ height: 'calc(100dvh - 4rem)', width: '100%' }}
-				camera={{ position: [0, 25, 0], fov: 55, near: 1, far: 15000 }}
+				camera={{ position: [10, 5, 10], fov: 55, near: 1, far: 15000 }}
 				onCreated={({ gl }) => {
 					// Three.js v0.155 以降なら outputColorSpace で色空間を設定
 					if (gl.outputColorSpace !== undefined) {
@@ -40,7 +40,17 @@ export default function HeroScene() {
 				{/* ライティングはここで統一して管理 */}
 				<Lighting theme={resolvedTheme || 'light'} />
 
-				<OrbitControls target={[0, 25, 0]} minDistance={50} maxDistance={2000} autoRotate={true} autoRotateSpeed={0.5} />
+				<OrbitControls
+					target={[0, 10, 0]}
+					minDistance={50}
+					maxDistance={2000}
+					autoRotate={true}
+					autoRotateSpeed={0.5}
+					// minPolarAngle={Math.PI / 4} // 45度（より強い見上げ角度）
+					// maxPolarAngle={Math.PI / 2.5} // 72度（水平よりやや下向き制限）
+					enableDamping={true}
+					dampingFactor={0.05}
+				/>
 				{/* 星のフィールドを Suspense でラップ */}
 				<Suspense fallback={null}>
 					{resolvedTheme === 'dark' && (
@@ -59,3 +69,4 @@ export default function HeroScene() {
 		</div>
 	)
 }
+
