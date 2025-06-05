@@ -16,7 +16,7 @@ export default function HeroScene() {
 	const [stars, setStars] = useState<Star[]>([])
 
 	useEffect(() => {
-		fetch('/stars_mag9.csv')
+		fetch('/stars_mag6.csv')
 			.then((r) => r.text())
 			.then((t) => setStars(parseStars(t)))
 			// eslint-disable-next-line no-console

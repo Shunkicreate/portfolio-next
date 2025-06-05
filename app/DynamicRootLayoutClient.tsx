@@ -8,12 +8,12 @@ import { type SNSType } from '../types/globals.type'
 
 // 動的インポートでメインレイアウトとThemeProviderを遅延ロード
 const DynamicLayout = dynamic(() => import('../components/Layout'), {
-	ssr: false,
+	ssr: true,
 	loading: () => null,
 })
 
 const DynamicThemeProvider = dynamic(() => import('../components/theme-provider').then((mod) => mod.ThemeProvider), {
-	ssr: false,
+	ssr: true,
 	loading: () => null,
 })
 
@@ -23,13 +23,14 @@ export default function DynamicRootLayoutClient({ children }: { children: React.
 	const [isLoading, setIsLoading] = useState(true)
 	return (
 		<DynamicThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-			{isLoading ? (
-				<LoadingLayout onLoadingComplete={() => setIsLoading(false)} />
-			) : (
-				<main>
+			<main>
+				{isLoading ? (
+					<LoadingLayout onLoadingComplete={() => setIsLoading(false)} />
+				) : (
 					<DynamicLayout SNSData={SNSData}>{children}</DynamicLayout>
-				</main>
-			)}
+				)}
+			</main>
 		</DynamicThemeProvider>
 	)
 }
+
