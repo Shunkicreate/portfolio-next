@@ -33,6 +33,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='en' className={`${notoSerif.variable} ${zenOldMincho.variable} ${inter.variable}`} suppressHydrationWarning>
+			<head>
+				<link rel='preload' href='/_next/static/chunks/three-vendor.js' as='script' />
+				<link rel='preload' href='/_next/static/chunks/react-vendor.js' as='script' />
+			</head>
 			<body>
 				<DynamicRootLayoutClient>{children}</DynamicRootLayoutClient>
 			</body>

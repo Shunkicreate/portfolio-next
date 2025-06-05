@@ -4,16 +4,23 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import Modal from './Modal'
 
+// ローディング中のコンポーネント
+const LoadingScene = () => (
+	<div className='w-full h-full flex items-center justify-center'>
+		<div className='animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900'></div>
+	</div>
+)
+
 const DynamicHeroScene = dynamic(() => import('../components/HeroScene'), {
-	ssr: false, // サーバー側でレンダリングせず、クライアントマウント後に読み込む
-	loading: () => <div className='w-full h-full' />, // 3D シーン読み込み中のプレースホルダー
+	ssr: false,
+	loading: LoadingScene,
 })
 
 export default function HomeContent() {
 	const [showModal, setShowModal] = useState(false)
 
 	useEffect(() => {
-		// 3秒後にモーダルを表示
+		// モーダルの表示を遅延させる代わりに、HeroSceneのロード完了後に表示
 		const timer = setTimeout(() => {
 			setShowModal(true)
 		}, 3000)

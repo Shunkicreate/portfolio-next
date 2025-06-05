@@ -3,25 +3,37 @@
 import { OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { useTheme } from 'next-themes'
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useState, lazy } from 'react'
 import * as THREE from 'three'
-import { Star, parseStars } from '../utils/star/parseStars'
+import { Star } from '../utils/star/parseStars'
 import Lighting from './Lighting'
-import SnowParticles from './SnowParticles'
-import { DesertSurface } from './desert/DesertSurface'
-import { StarField } from './star/StarField'
+
+// Lazy load heavy components
+const StarField = lazy(() => import('./star/StarField').then((mod) => ({ default: mod.StarField })))
+const DesertSurface = lazy(() => import('./desert/DesertSurface').then((mod) => ({ default: mod.DesertSurface })))
+const SnowParticles = lazy(() => import('./SnowParticles'))
+
+async function fetchStars(): Promise<Star[]> {
+	try {
+		const response = await fetch('/stars_mag6.csv')
+		const text = await response.text()
+		const { parseStars } = await import('../utils/star/parseStars')
+		return parseStars(text)
+	} catch (_) {
+		return []
+	}
+}
 
 export default function HeroScene() {
 	const { resolvedTheme } = useTheme()
 	const [stars, setStars] = useState<Star[]>([])
 
 	useEffect(() => {
-		fetch('/stars_mag6.csv')
-			.then((r) => r.text())
-			.then((t) => setStars(parseStars(t)))
-			// eslint-disable-next-line no-console
-			.catch((e) => console.error('stars CSV 読み込みエラー:', e))
-	}, [])
+		// Only fetch stars data when dark theme is active
+		if (resolvedTheme === 'dark') {
+			void fetchStars().then(setStars)
+		}
+	}, [resolvedTheme])
 
 	return (
 		<div className='relative w-full h-full'>
@@ -52,12 +64,15 @@ export default function HeroScene() {
 					dampingFactor={0.05}
 				/>
 				{/* 星のフィールドを Suspense でラップ */}
-				<Suspense fallback={null}>
-					{resolvedTheme === 'dark' && (
-						<>
-							<StarField stars={stars} sphereRadius={200} />
-						</>
-					)}
+				<Suspense
+					fallback={
+						<mesh>
+							<boxGeometry args={[1, 1, 1]} />
+							<meshStandardMaterial color='gray' />
+						</mesh>
+					}
+				>
+					{resolvedTheme === 'dark' && stars.length > 0 && <StarField stars={stars} sphereRadius={200} />}
 					{resolvedTheme === 'light' && (
 						<>
 							<DesertSurface />
