@@ -5,7 +5,7 @@ import { Metadata } from 'next'
 import DynamicRootLayoutClient from './DynamicRootLayoutClient'
 
 export const metadata: Metadata = {
-	metadataBase: new URL('https://shunki-create.com'),
+	metadataBase: new URL('https:/homepage-git-feature-fixopg-shunkicreates-projects.vercel.app'),
 	title: { default: 'Shunki Create', template: '%s | Shunki Create' },
 	description: 'Portfolio site of Shunki Tada',
 
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 				url: '/gallery/DSC04337_edited.webp',
 				width: 1200,
 				height: 630,
-				alt: 'Shunki Create ポートフォリオのプレビュー画像',
+				alt: 'Preview image of Shunki Create',
 			},
 		],
 	},
