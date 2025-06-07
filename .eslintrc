@@ -30,7 +30,9 @@
 	"ignorePatterns": [
 		"scripts/**",
 		"scripts_dist/**",
-		"*.config.js"
+		"*.config.js",
+		"*.config.ts",
+		"stories/**"
 	],
 	"rules": {
 		"react-hooks/rules-of-hooks": "error",

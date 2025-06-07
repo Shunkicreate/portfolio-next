@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useEffect, useState } from 'react'
-import Modal from '../components/Modal'
 import { ThemeProvider } from 'next-themes'
-import Layout from '../components/Layout'
+import { useEffect, useState } from 'react'
 import SNSDataJson from '../SNSdata.json'
+import Layout from '../components/Layout'
+import Modal from '../components/Modal'
 import { type SNSType } from '../types/globals.type'
 
 const SNSData: SNSType[] = SNSDataJson.data as unknown as SNSType[]
@@ -75,4 +75,3 @@ export const LongContent: Story = {
 			'This modal demonstrates scrollable content behavior. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 	},
 }
-
