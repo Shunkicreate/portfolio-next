@@ -1,4 +1,5 @@
 import './globals.css'
+import '@/styles/tailwind.css'
 import { Metadata } from 'next'
 import DynamicRootLayoutClient from './DynamicRootLayoutClient'
 
@@ -47,3 +48,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		</html>
 	)
 }
+

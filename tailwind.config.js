@@ -60,10 +60,24 @@ module.exports = {
 					from: { height: 'var(--radix-accordion-content-height)' },
 					to: { height: 0 },
 				},
+				draw: {
+					to: { strokeDashoffset: 0 },
+				},
+				hoverShake: {
+					'0%': { transform: 'scale(1) translateX(0) translateY(0)' },
+					'10%': { transform: 'scale(1.05) translateX(0) translateY(-1rem)' },
+					'30%': { transform: 'scale(1.05) translateX(-5px) translateY(-1rem)' },
+					'50%': { transform: 'scale(1.05) translateX(5px) translateY(-1rem)' },
+					'70%': { transform: 'scale(1.05) translateX(-5px) translateY(-1rem)' },
+					'90%': { transform: 'scale(1.025) translateX(0) translateY(-1rem)' },
+					'100%': { transform: 'scale(1) translateX(0) translateY(0)' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
+				draw: 'draw 1s ease forwards',
+				hoverShake: 'hoverShake 0.8s ease-in-out forwards',
 			},
 		},
 	},
@@ -75,4 +89,6 @@ module.exports = {
 		optimizeUniversalDefaults: true,
 	},
 }
+
+
 
