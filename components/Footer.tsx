@@ -1,24 +1,25 @@
-import { SNSType } from '../types/globals.type'
+import { type SNSType } from '../types/globals.type'
 import SNSIcon from './SNSIcon'
 
-type Props = {
+interface Props {
 	SNSData: SNSType[]
 }
 
-const Footer = (props: Props) => {
-	const SNSData = props.SNSData
+export default function Footer({ SNSData }: Props) {
 	return (
-		<footer className='text-center m-4'>
-			<div className='border-t-2 border-gray-100 border-solid'>
-				<div className='grid grid-cols-6 m-12'>
-					{SNSData.map((item, i) => {
-						return <SNSIcon key={i} src={item.src} link={item.link} SNS={item.SNS} />
-					})}
+		<footer className='mt-auto py-4 px-4 h-40'>
+			<div className='container mx-auto'>
+				<div className='border-t border-border'>
+					<div className='grid grid-cols-3 md:grid-cols-6 gap-4 py-6'>
+						{SNSData.map((item, index) => (
+							<SNSIcon key={index} sns={item} />
+						))}
+					</div>
+				</div>
+				<div className='text-center text-sm text-muted-foreground'>
+					&copy; {new Date().getFullYear()} Shunki Tada. All rights reserved.
 				</div>
 			</div>
-			<div>&copy; 2023- Shunki Tada All rights reserved.</div>
 		</footer>
 	)
 }
-
-export default Footer

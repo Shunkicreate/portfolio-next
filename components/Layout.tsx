@@ -1,21 +1,23 @@
-import { ReactNode } from 'react'
-import { SNSType } from '../types/globals.type'
+import { usePathname } from 'next/navigation'
+import { type ReactNode } from 'react'
+import { type SNSType } from '../types/globals.type'
 import Footer from './Footer'
-import Header from './Header'
+import Navigation from './Navigation'
 
-type Props = {
+interface LayoutProps {
 	children: ReactNode
 	SNSData: SNSType[]
 }
 
-const Layout = ({ children, SNSData }: Props) => {
+export default function Layout({ children, SNSData }: LayoutProps) {
+	const pathname = usePathname()
+	const isHome = pathname === '/'
+
 	return (
-		<>
-			<Header></Header>
-			{children}
-			<Footer SNSData={SNSData}></Footer>
-		</>
+		<div className='h-full'>
+			<Navigation />
+			<div className='flex flex-col flex-1 min-h-[calc(100dvh-10rem)] pt-16'>{children}</div>
+			{isHome ? null : <Footer SNSData={SNSData} />}
+		</div>
 	)
 }
-
-export default Layout

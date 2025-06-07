@@ -1,19 +1,23 @@
-type Props = {
-	src: string
+import Image from 'next/image'
+import Link from 'next/link'
+import { type SNSType } from '../types/globals.type'
 
-	link: string
-
-	SNS: string
+interface Props {
+	sns: SNSType
 }
 
-const SNSIcon = (props: Props) => {
+export default function SNSIcon({ sns }: Props) {
 	return (
-		<div className='w-8 m-auto lg:w-12'>
-			<a href={props.link} target='_blank' rel='noopener noreferrer'>
-				<img src={props.src} alt={props.SNS} />
-			</a>
-		</div>
+		<Link href={sns.link} target='_blank' rel='noopener noreferrer' className='block' aria-label={sns.SNS}>
+			<div className='p-2 rounded-full hover:bg-accent transition-colors'>
+				<Image
+					src={sns.src}
+					alt={sns.SNS}
+					width={40}
+					height={40}
+					className='mx-auto w-8 h-8 md:w-10 md:h-10 object-contain text-foreground dark:invert'
+				/>
+			</div>
+		</Link>
 	)
 }
-
-export default SNSIcon
