@@ -9,7 +9,6 @@ const criticalStyles = {
 	container: {
 		position: 'relative' as const,
 		minHeight: '100vh',
-		backgroundColor: 'var(--background)',
 		margin: 0,
 		padding: 0,
 	},
@@ -22,7 +21,6 @@ const criticalStyles = {
 		fontSize: '3rem',
 		fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
 		fontWeight: 'bold',
-		color: 'var(--foreground)',
 		opacity: 0.001,
 		margin: 0,
 		padding: 0,
