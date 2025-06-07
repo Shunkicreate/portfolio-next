@@ -37,11 +37,31 @@ export default function Modal({ isOpen, onClose, title, description }: ModalProp
 			{/* Modal Panel */}
 			<div className='fixed inset-0 flex items-center justify-center p-4'>
 				<Dialog.Panel className={`${panelBaseClass} ${panelStateClass}`}>
+					{/* Close Button */}
+					<button
+						onClick={handleClose}
+						aria-label='Close modal'
+						className='absolute top-4 right-4 p-2 rounded-full text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/30 dark:focus:ring-white/30 transition'
+					>
+						×
+					</button>
+
 					<Dialog.Title className='text-3xl font-bold tracking-tight text-gray-900/80 dark:text-white/80'>{title}</Dialog.Title>
+
 					<Dialog.Description className='mt-6 text-lg leading-8 text-gray-600/80 dark:text-gray-300/80'>
 						{description}
 					</Dialog.Description>
-					<div className='mt-8 flex justify-end'>
+
+					<div className='mt-8 flex justify-end space-x-4'>
+						{/* Visit Scene Button */}
+						<button
+							onClick={handleClose}
+							className='rounded-md bg-black/10 dark:bg-white/10 backdrop-blur-sm px-6 py-2.5 text-sm font-semibold text-black/70 dark:text-white/70 shadow-sm ring-1 ring-black/[0.17] dark:ring-white/[0.17] hover:bg-black/20 dark:hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black/30 dark:focus-visible:outline-white/30 transition-all duration-200'
+						>
+							Visit Scene
+						</button>
+
+						{/* whoami Button */}
 						<Link
 							href='/about'
 							onClick={handleClose}
