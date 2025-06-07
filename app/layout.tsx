@@ -29,20 +29,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					dangerouslySetInnerHTML={{
 						__html: `
 					:root {
-						--background: #FAF8F6;
-						--foreground: #1A1A1A;
 						--font-sans: ${systemFont};
-					}
-					@media (prefers-color-scheme: dark) {
-						:root {
-							--background: #1A1A1A;
-							--foreground: #FAF8F6;
-						}
 					}
 					body {
 						margin: 0;
-						background-color: var(--background);
-						color: var(--foreground);
 						font-family: var(--font-sans);
 						-webkit-font-smoothing: antialiased;
 						-moz-osx-font-smoothing: grayscale;

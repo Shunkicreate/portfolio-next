@@ -1,25 +1,23 @@
 import { type SNSType } from '../types/globals.type'
 import SNSIcon from './SNSIcon'
 
-interface FooterProps {
+interface Props {
 	SNSData: SNSType[]
 }
 
-export default function Footer({ SNSData }: FooterProps) {
-	const currentYear = new Date().getFullYear()
-
+export default function Footer({ SNSData }: Props) {
 	return (
-		<footer className='mt-auto py-4 px-4 bg-gray-50 dark:bg-gray-900 h-40'>
+		<footer className='mt-auto py-4 px-4 h-40'>
 			<div className='container mx-auto'>
-				<div className='border-t border-gray-200 dark:border-gray-700'>
+				<div className='border-t border-border'>
 					<div className='grid grid-cols-3 md:grid-cols-6 gap-4 py-6'>
-						{SNSData.map((item) => (
-							<SNSIcon key={item.SNS} src={item.src} link={item.link} SNS={item.SNS} />
+						{SNSData.map((item, index) => (
+							<SNSIcon key={index} sns={item} />
 						))}
 					</div>
 				</div>
-				<div className='text-center text-sm text-gray-600 dark:text-gray-400'>
-					&copy; {currentYear} Shunki Tada. All rights reserved.
+				<div className='text-center text-sm text-muted-foreground'>
+					&copy; {new Date().getFullYear()} Shunki Tada. All rights reserved.
 				</div>
 			</div>
 		</footer>

@@ -13,7 +13,7 @@ const DynamicLayout = dynamic(() => import('../components/Layout'), {
 	loading: () => null,
 })
 
-const SNSData: SNSType[] = SNSDataJson.data
+const SNSData: SNSType[] = SNSDataJson.data as unknown as SNSType[]
 
 interface Props {
 	children: ReactNode

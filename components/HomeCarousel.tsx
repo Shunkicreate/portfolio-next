@@ -20,7 +20,7 @@ export default function HomeCarousel({ imgs }: HomeCarouselProps) {
 
 	if (!imgs?.length) {
 		return (
-			<div className='w-full h-64 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg'>
+			<div className='w-full h-64 flex items-center justify-center rounded-lg'>
 				<p className='text-gray-500 dark:text-gray-400'>No images available</p>
 			</div>
 		)
@@ -29,7 +29,7 @@ export default function HomeCarousel({ imgs }: HomeCarouselProps) {
 	return (
 		<div className='relative w-full aspect-video'>
 			{isLoading && (
-				<div className='absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800'>
+				<div className='absolute inset-0 flex items-center justify-center'>
 					<div className='w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin' />
 				</div>
 			)}

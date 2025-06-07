@@ -1,31 +1,23 @@
 import Image from 'next/image'
+import Link from 'next/link'
+import { type SNSType } from '../types/globals.type'
 
-interface SNSIconProps {
-	src: string
-
-	link: string
-
-	SNS: string
+interface Props {
+	sns: SNSType
 }
 
-export default function SNSIcon({ src, link, SNS }: SNSIconProps) {
+export default function SNSIcon({ sns }: Props) {
 	return (
-		<div className='flex justify-center'>
-			<a
-				href={link}
-				target='_blank'
-				rel='noopener noreferrer'
-				className='p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
-				aria-label={`Visit ${SNS} profile`}
-			>
+		<Link href={sns.link} target='_blank' rel='noopener noreferrer' className='block' aria-label={sns.SNS}>
+			<div className='p-2 rounded-full hover:bg-accent transition-colors'>
 				<Image
-					src={src}
-					alt={`${SNS} icon`}
-					width={32}
-					height={32}
-					className='w-8 h-8 md:w-10 md:h-10 object-contain dark:invert text-black dark:text-white'
+					src={sns.src}
+					alt={sns.SNS}
+					width={40}
+					height={40}
+					className='w-8 h-8 md:w-10 md:h-10 object-contain text-foreground dark:invert'
 				/>
-			</a>
-		</div>
+			</div>
+		</Link>
 	)
 }
