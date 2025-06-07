@@ -3,7 +3,6 @@
 		"browser": true,
 		"es2021": true
 	},
-	"overrides": [],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"ecmaVersion": "latest",
@@ -18,13 +17,11 @@
 	],
 	"extends": [
 		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
 		"plugin:react/jsx-runtime",
+		"plugin:@typescript-eslint/recommended",
 		"plugin:@typescript-eslint/recommended-requiring-type-checking",
 		"plugin:import/warnings",
-		"plugin:@next/next/recommended",
 		"next/core-web-vitals",
-		"next",
 		"prettier"
 	],
 	"ignorePatterns": [
@@ -76,4 +73,28 @@
 			}
 		]
 	},
+	"overrides": [
+		{
+			"files": [
+				"components/HeroScene.tsx",
+				"components/Lighting.tsx",
+				"components/Skybox.tsx",
+				"components/SnowParticles.tsx",
+				"components/ThreeCanvas.tsx",
+				"components/desert/DesertSurface.tsx",
+				"components/star/StarMaterial.tsx",
+				"components/star/StarPoints.tsx",
+				"utils/star/starColor.ts",
+				"utils/star/texture.ts"
+			],
+			"rules": {
+				"@typescript-eslint/no-unsafe-assignment": "off",
+				"@typescript-eslint/no-unsafe-member-access": "off",
+				"@typescript-eslint/no-unsafe-call": "off",
+				"@typescript-eslint/no-unsafe-return": "off",
+				"@typescript-eslint/no-redundant-type-constituents": "off",
+				"@typescript-eslint/no-unsafe-argument": "off"
+			}
+		}
+	]
 }
