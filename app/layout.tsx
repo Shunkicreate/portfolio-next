@@ -25,23 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='ja' suppressHydrationWarning>
-			<head>
-				<style
-					dangerouslySetInnerHTML={{
-						__html: `
-					:root {
-						--font-sans: ${systemFont};
-					}
-					body {
-						margin: 0;
-						font-family: var(--font-sans);
-						-webkit-font-smoothing: antialiased;
-						-moz-osx-font-smoothing: grayscale;
-					}
-				`,
-					}}
-				/>
-			</head>
+			<head />
 			<body>
 				<DynamicRootLayoutClient>{children}</DynamicRootLayoutClient>
 			</body>
