@@ -3,12 +3,6 @@ import '@/styles/tailwind.css'
 import { Metadata } from 'next'
 import DynamicRootLayoutClient from './DynamicRootLayoutClient'
 
-// システムフォントを基本フォントとして設定
-const systemFont = `-apple-system, BlinkMacSystemFont, "Segoe UI", 
-  Roboto, "Helvetica Neue", Arial, "Noto Sans", 
-  sans-serif, "Apple Color Emoji", "Segoe UI Emoji", 
-  "Segoe UI Symbol", "Noto Color Emoji"`
-
 export const metadata: Metadata = {
 	title: {
 		default: 'Shunki Create',
