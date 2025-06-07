@@ -4,15 +4,18 @@ import { Metadata } from 'next'
 import DynamicRootLayoutClient from './DynamicRootLayoutClient'
 
 export const metadata: Metadata = {
-	title: {
-		default: 'Shunki Create',
-		template: '%s | Shunki Create',
-	},
+	metadataBase: new URL('https://shunki-create.com'),
+	title: { default: 'Shunki Create', template: '%s | Shunki Create' },
 	description: 'Portfolio site of Shunki Tada',
 	openGraph: {
-		title: 'Shunki Create',
-		description: 'Portfolio site of Shunki Tada',
+		images: ['/gallery/DSC04337_edited.webp'],
+		url: '/',
+		siteName: 'Shunki Create',
 		type: 'website',
+	},
+	twitter: {
+		card: 'summary_large_image',
+		images: ['/gallery/DSC04337_edited.webp'],
 	},
 }
 
