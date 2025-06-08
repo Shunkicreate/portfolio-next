@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { ThemeProvider } from 'next-themes'
 import { useEffect, useState } from 'react'
 import SNSDataJson from '../SNSdata.json'
-import Layout from '../components/Layout'
+import Layout from '../components/MainLayout'
 import Modal from '../components/Modal'
 import { type SNSType } from '../types/globals.type'
 

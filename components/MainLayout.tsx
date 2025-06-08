@@ -4,12 +4,12 @@ import { type SNSType } from '../types/globals.type'
 import Footer from './Footer'
 import Navigation from './Navigation'
 
-interface LayoutProps {
+interface MainLayoutProps {
 	children: ReactNode
 	SNSData: SNSType[]
 }
 
-export default function Layout({ children, SNSData }: LayoutProps) {
+export default function MainLayout({ children, SNSData }: MainLayoutProps) {
 	const pathname = usePathname()
 	const isHome = pathname === '/'
 

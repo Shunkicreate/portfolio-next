@@ -8,7 +8,7 @@ import LoadingLayout from '../components/LoadingLayout'
 import { type SNSType } from '../types/globals.type'
 
 // 動的インポートでメインレイアウトを遅延ロード
-const DynamicLayout = dynamic(() => import('../components/Layout'), {
+const DynamicLayout = dynamic(() => import('../components/MainLayout'), {
 	ssr: true,
 	loading: () => null,
 })
