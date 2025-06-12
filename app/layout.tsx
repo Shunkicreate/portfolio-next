@@ -3,6 +3,7 @@ import './globals.css'
 import '@/styles/tailwind.css'
 import type { Metadata } from 'next'
 import LayoutClient from './layout_client'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 const siteUrl = 'https://shunki-create.com'
 
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang='ja'>
 			<body>
+				<GoogleAnalytics />
 				<LayoutClient>{children}</LayoutClient>
 			</body>
 		</html>
